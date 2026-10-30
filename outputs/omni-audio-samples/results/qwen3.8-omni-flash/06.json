@@ -1,0 +1,54 @@
+{
+  "sample_id": "06",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:14.266699+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"就是这个项目就是需要明确一个负责人，就是避免每个人都以为别人在处理。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 3, \"这个\": 1, \"那个\": 0}, \"observations\": [{\"quote\": \"就是这个项目就是需要明确一个负责人，就是避免每个人都以为别人在处理。\", \"type\": \"filler\", \"reason\": \"说话人连续使用了三次“就是”作为口头禅和语气垫词，导致句子显得拖沓。\", \"start_s\": 0.08, \"end_s\": 6.4}], \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"就是这个项目就是需要明确一个负责人，就是避免每个人都以为别人在处理。\", \"suggestion\": \"减少无意义的“就是”，可以直接说：“这个项目需要明确一个负责人，避免每个人都以为别人在处理。”\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "就是这个项目就是需要明确一个负责人，就是避免每个人都以为别人在处理。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 3,
+      "这个": 1,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "就是这个项目就是需要明确一个负责人，就是避免每个人都以为别人在处理。",
+        "type": "filler",
+        "reason": "说话人连续使用了三次“就是”作为口头禅和语气垫词，导致句子显得拖沓。",
+        "start_s": 0.08,
+        "end_s": 6.4
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "就是这个项目就是需要明确一个负责人，就是避免每个人都以为别人在处理。",
+        "suggestion": "减少无意义的“就是”，可以直接说：“这个项目需要明确一个负责人，避免每个人都以为别人在处理。”"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 347,
+    "total_tokens": 567,
+    "completion_tokens": 220,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 51,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 220
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-9d90a8f2-2795-9808-860a-54fa09b7deb4",
+  "elapsed_s": 3.7
+}

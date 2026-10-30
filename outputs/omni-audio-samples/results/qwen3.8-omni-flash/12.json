@@ -1,0 +1,48 @@
+{
+  "sample_id": "12",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:26.232723+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"我想先把这个需，我重新说一下。先确认需求，再安排开发。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 1, \"那个\": 0}, \"observations\": [{\"quote\": \"我想先把这个需，我重新说一下。\", \"type\": \"repair\", \"reason\": \"说话人中途停止未完成的句子“我想先把这个需”，并使用元话语“我重新说一下”进行自我修正和重启。\", \"start_s\": 0.24, \"end_s\": 3.68}], \"issues\": [], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "我想先把这个需，我重新说一下。先确认需求，再安排开发。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 1,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "我想先把这个需，我重新说一下。",
+        "type": "repair",
+        "reason": "说话人中途停止未完成的句子“我想先把这个需”，并使用元话语“我重新说一下”进行自我修正和重启。",
+        "start_s": 0.24,
+        "end_s": 3.68
+      }
+    ],
+    "issues": [],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 340,
+    "total_tokens": 501,
+    "completion_tokens": 161,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 44,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 161
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-e96954e1-68bd-9d31-ba0c-2aa4def2493f",
+  "elapsed_s": 2.61
+}

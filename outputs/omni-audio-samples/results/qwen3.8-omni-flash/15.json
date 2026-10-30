@@ -1,0 +1,55 @@
+{
+  "sample_id": "15",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:28.848578+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"我们现在最需要解决的就是录音上传失败的问题，责任人就是今天值班的工程师。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 2, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"就是\", \"type\": \"normal\", \"reason\": \"作为判断动词使用，连接主语和宾语，属于正常表达。\", \"start_s\": 1.64, \"end_s\": 1.96}, {\"quote\": \"就是\", \"type\": \"normal\", \"reason\": \"作为判断动词使用，强调责任人的身份，属于正常表达。\", \"start_s\": 7.32, \"end_s\": 7.56}], \"issues\": [], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "我们现在最需要解决的就是录音上传失败的问题，责任人就是今天值班的工程师。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 2,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "就是",
+        "type": "normal",
+        "reason": "作为判断动词使用，连接主语和宾语，属于正常表达。",
+        "start_s": 1.64,
+        "end_s": 1.96
+      },
+      {
+        "quote": "就是",
+        "type": "normal",
+        "reason": "作为判断动词使用，强调责任人的身份，属于正常表达。",
+        "start_s": 7.32,
+        "end_s": 7.56
+      }
+    ],
+    "issues": [],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 347,
+    "total_tokens": 537,
+    "completion_tokens": 190,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 51,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 190
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-6487e217-1701-9ca0-a265-1170b6968677",
+  "elapsed_s": 2.95
+}

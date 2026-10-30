@@ -1,0 +1,8 @@
+{
+  "testedAt": "2026-10-30T15:45:53.397Z",
+  "attemptId": "ec86f999-11f1-4829-bff5-aa315a00240d",
+  "origin": "Earlier real Omni schema failure, not an injected failure",
+  "retryClickedInBrowser": true,
+  "realModelCompleted": true,
+  "originalAudioHashUnchanged": true
+}

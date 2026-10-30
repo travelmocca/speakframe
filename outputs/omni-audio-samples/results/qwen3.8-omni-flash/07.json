@@ -1,0 +1,55 @@
+{
+  "sample_id": "07",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:17.267251+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"这个，我建议明天再讨论。这个今天还缺少关键数据。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 2, \"那个\": 0}, \"observations\": [{\"quote\": \"这个\", \"type\": \"normal\", \"reason\": \"作为指示代词，指代前文提到的事项，属于正常用法。\", \"start_s\": 0.16, \"end_s\": 0.48}, {\"quote\": \"这个\", \"type\": \"normal\", \"reason\": \"作为指示代词，指代当前讨论的话题，属于正常用法。\", \"start_s\": 3.52, \"end_s\": 3.84}], \"issues\": [], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "这个，我建议明天再讨论。这个今天还缺少关键数据。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 2,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "这个",
+        "type": "normal",
+        "reason": "作为指示代词，指代前文提到的事项，属于正常用法。",
+        "start_s": 0.16,
+        "end_s": 0.48
+      },
+      {
+        "quote": "这个",
+        "type": "normal",
+        "reason": "作为指示代词，指代当前讨论的话题，属于正常用法。",
+        "start_s": 3.52,
+        "end_s": 3.84
+      }
+    ],
+    "issues": [],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 340,
+    "total_tokens": 531,
+    "completion_tokens": 191,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 44,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 191
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-17b584f5-f2eb-9030-a505-a809c00c14a2",
+  "elapsed_s": 3.01
+}

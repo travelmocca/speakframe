@@ -1,0 +1,48 @@
+{
+  "sample_id": "18",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:32.850701+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"我认为应该立即上线，因为办公室的椅子换了颜色，所以上线风险肯定很低。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"我认为应该立即上线，因为办公室的椅子换了颜色，所以上线风险肯定很低。\", \"type\": \"normal\", \"reason\": \"句子结构完整，逻辑连贯，没有使用冗余垫词或自我修正。\", \"start_s\": 0.16, \"end_s\": 7.32}], \"issues\": [], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "我认为应该立即上线，因为办公室的椅子换了颜色，所以上线风险肯定很低。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "我认为应该立即上线，因为办公室的椅子换了颜色，所以上线风险肯定很低。",
+        "type": "normal",
+        "reason": "句子结构完整，逻辑连贯，没有使用冗余垫词或自我修正。",
+        "start_s": 0.16,
+        "end_s": 7.32
+      }
+    ],
+    "issues": [],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 340,
+    "total_tokens": 502,
+    "completion_tokens": 162,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 44,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 162
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-01f0c45b-e975-9865-8ed1-7c4ae54753b8",
+  "elapsed_s": 2.62
+}

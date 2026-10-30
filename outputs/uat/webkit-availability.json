@@ -1,0 +1,6 @@
+{
+  "attempted": true,
+  "status": "not_verified",
+  "reason": "Frozen macOS 14 WebKit engine failed to create a page: Protocol error (Page.overrideSetting): Unknown setting: PushAPIEnabled",
+  "scope": "Environmental browser-launch failure; no Safari/iOS compatibility pass claimed"
+}

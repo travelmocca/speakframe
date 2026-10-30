@@ -1,0 +1,54 @@
+{
+  "sample_id": "09",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:20.274192+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"我、我我觉得应该先确认需求，再开始画页面。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"我、我我觉得\", \"type\": \"repetition\", \"reason\": \"说话人连续重复了三次“我”字才说出完整句子，属于口吃或思考时的停顿重复。\", \"start_s\": 0.16, \"end_s\": 1.28}], \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"我、我我觉得\", \"suggestion\": \"在表达观点时，尽量放慢语速，想好再说，避免不必要的字词重复，使表达更流畅自信。\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "我、我我觉得应该先确认需求，再开始画页面。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "我、我我觉得",
+        "type": "repetition",
+        "reason": "说话人连续重复了三次“我”字才说出完整句子，属于口吃或思考时的停顿重复。",
+        "start_s": 0.16,
+        "end_s": 1.28
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "我、我我觉得",
+        "suggestion": "在表达观点时，尽量放慢语速，想好再说，避免不必要的字词重复，使表达更流畅自信。"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 326,
+    "total_tokens": 529,
+    "completion_tokens": 203,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 30,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 203
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-4b6b5fa1-98c3-927f-aed9-ddf7dafc7d59",
+  "elapsed_s": 3.33
+}

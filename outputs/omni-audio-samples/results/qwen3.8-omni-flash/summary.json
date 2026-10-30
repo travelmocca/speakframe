@@ -1,0 +1,90 @@
+{
+  "model": "qwen3.8-omni-flash",
+  "calls": 30,
+  "transport_completed": 30,
+  "json_parse_success": 29,
+  "first_pass": {
+    "samples": 24,
+    "all_seven_counts_match_script_samples": [
+      "01",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24"
+    ],
+    "mismatches": [
+      {
+        "id": "02",
+        "expected": {
+          "嗯": 3,
+          "啊": 0,
+          "呃": 0,
+          "然后": 0,
+          "就是": 0,
+          "这个": 0,
+          "那个": 0
+        },
+        "actual": {
+          "嗯": 2,
+          "啊": 0,
+          "呃": 0,
+          "然后": 0,
+          "就是": 0,
+          "这个": 0,
+          "那个": 0
+        }
+      }
+    ],
+    "latency_median_s": 3.755,
+    "latency_min_s": 1.61,
+    "latency_max_s": 6.66,
+    "out_of_bounds_timestamps": [
+      {
+        "id": "15",
+        "duration_s": 7.233,
+        "observation": {
+          "quote": "就是",
+          "type": "normal",
+          "reason": "作为判断动词使用，强调责任人的身份，属于正常表达。",
+          "start_s": 7.32,
+          "end_s": 7.56
+        }
+      },
+      {
+        "id": "18",
+        "duration_s": 6.879,
+        "observation": {
+          "quote": "我认为应该立即上线，因为办公室的椅子换了颜色，所以上线风险肯定很低。",
+          "type": "normal",
+          "reason": "句子结构完整，逻辑连贯，没有使用冗余垫词或自我修正。",
+          "start_s": 0.16,
+          "end_s": 7.32
+        }
+      }
+    ]
+  },
+  "usage_total": {
+    "prompt_tokens": 11487,
+    "completion_tokens": 6760,
+    "total_tokens": 18247
+  },
+  "limitation": "Not human-verified; script count match is not real-world accuracy; one request per sample per prompt, no statistical repeatability claim."
+}

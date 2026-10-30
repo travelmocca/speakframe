@@ -1,0 +1,69 @@
+{
+  "sample_id": "20",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:36.299476+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"嗯，我建议就是先做小范围试用，然后……然后收集三位用户的反馈，这个……再决定是否正式上线。\", \"counts\": {\"嗯\": 1, \"啊\": 0, \"呃\": 0, \"然后\": 2, \"就是\": 1, \"这个\": 1, \"那个\": 0}, \"observations\": [{\"quote\": \"嗯\", \"type\": \"filler\", \"reason\": \"句首语气词，用于引起注意或思考缓冲。\", \"start_s\": 0.48, \"end_s\": 0.64}, {\"quote\": \"就是\", \"type\": \"normal\", \"reason\": \"正常口语表达中的强调或解释性连接词。\", \"start_s\": null, \"end_s\": null}, {\"quote\": \"然后……然后\", \"type\": \"repetition\", \"reason\": \"连续重复使用“然后”，属于口语中的停顿和重复。\", \"start_s\": null, \"end_s\": null}, {\"quote\": \"这个\", \"type\": \"filler\", \"reason\": \"此处作为话语标记（discourse marker），用于填补思考间隙，无实际指代意义。\", \"start_s\": null, \"end_s\": null}], \"issues\": [], \"uncertainty\": \"部分填充词的具体起止时间因音频未提供精确对齐数据而标记为null。\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "嗯，我建议就是先做小范围试用，然后……然后收集三位用户的反馈，这个……再决定是否正式上线。",
+    "counts": {
+      "嗯": 1,
+      "啊": 0,
+      "呃": 0,
+      "然后": 2,
+      "就是": 1,
+      "这个": 1,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "嗯",
+        "type": "filler",
+        "reason": "句首语气词，用于引起注意或思考缓冲。",
+        "start_s": 0.48,
+        "end_s": 0.64
+      },
+      {
+        "quote": "就是",
+        "type": "normal",
+        "reason": "正常口语表达中的强调或解释性连接词。",
+        "start_s": null,
+        "end_s": null
+      },
+      {
+        "quote": "然后……然后",
+        "type": "repetition",
+        "reason": "连续重复使用“然后”，属于口语中的停顿和重复。",
+        "start_s": null,
+        "end_s": null
+      },
+      {
+        "quote": "这个",
+        "type": "filler",
+        "reason": "此处作为话语标记（discourse marker），用于填补思考间隙，无实际指代意义。",
+        "start_s": null,
+        "end_s": null
+      }
+    ],
+    "issues": [],
+    "uncertainty": "部分填充词的具体起止时间因音频未提供精确对齐数据而标记为null。"
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 347,
+    "total_tokens": 646,
+    "completion_tokens": 299,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 51,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 299
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-7290891b-1ec2-9a3a-bf5f-d36e73ca8f51",
+  "elapsed_s": 5.25
+}

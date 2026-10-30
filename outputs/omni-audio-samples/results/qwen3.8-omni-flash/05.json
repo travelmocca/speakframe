@@ -1,0 +1,61 @@
+{
+  "sample_id": "05",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:11.830131+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"然后，然后我想说的是先检查数据，然后，然后我们再决定要不要重跑。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 4, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"然后，然后我想说的是\", \"type\": \"repetition\", \"reason\": \"连续使用两个“然后”作为话语起始的填充词，属于无意义的重复。\", \"start_s\": 0.16, \"end_s\": 2.56}, {\"quote\": \"然后，然后我们再决定\", \"type\": \"repetition\", \"reason\": \"再次连续使用两个“然后”，表现出对连接词的过度依赖和口语习惯性的重复。\", \"start_s\": 3.84, \"end_s\": 5.6}] , \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"在短短一句话中，“然后”出现了四次，且两次以“然后，然后”的形式连续出现。\", \"suggestion\": \"建议减少“然后”的使用频率，尝试用更简洁的方式连接句子，例如直接说“我想说的是……”或“接下来我们……”。\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "然后，然后我想说的是先检查数据，然后，然后我们再决定要不要重跑。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 4,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "然后，然后我想说的是",
+        "type": "repetition",
+        "reason": "连续使用两个“然后”作为话语起始的填充词，属于无意义的重复。",
+        "start_s": 0.16,
+        "end_s": 2.56
+      },
+      {
+        "quote": "然后，然后我们再决定",
+        "type": "repetition",
+        "reason": "再次连续使用两个“然后”，表现出对连接词的过度依赖和口语习惯性的重复。",
+        "start_s": 3.84,
+        "end_s": 5.6
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "在短短一句话中，“然后”出现了四次，且两次以“然后，然后”的形式连续出现。",
+        "suggestion": "建议减少“然后”的使用频率，尝试用更简洁的方式连接句子，例如直接说“我想说的是……”或“接下来我们……”。"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 347,
+    "total_tokens": 633,
+    "completion_tokens": 286,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 51,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 286
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-3e430f84-6181-9723-84ce-0e0df4259e39",
+  "elapsed_s": 5.44
+}

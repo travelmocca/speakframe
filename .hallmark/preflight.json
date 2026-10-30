@@ -1,0 +1,23 @@
+{
+  "scope": "app",
+  "initialInspection": {
+    "existingApp": false,
+    "existingDesignSystem": false,
+    "preserved": ["specs/", "docs/", "outputs/omni-audio-samples/", "local credential files"]
+  },
+  "material": {
+    "real": ["user topic and goal", "recorded audio", "actual Omni transcript and feedback"],
+    "absent": ["testimonials", "invented scores", "progress claims", "stock photos"]
+  },
+  "theme": {
+    "name": "Dose",
+    "slug": "dose",
+    "dealPosition": "3/3",
+    "adaptation": "App scope; Chinese sans-serif; no marketing hero or photographs"
+  },
+  "evidence": {
+    "staticAndAuthRender": "outputs/uat/hallmark-check.txt",
+    "authenticatedResponsive": "outputs/uat/responsive-checks.json"
+  },
+  "review": "Independent read-only code review plus in-thread screenshot review; findings fixed and regression tested"
+}

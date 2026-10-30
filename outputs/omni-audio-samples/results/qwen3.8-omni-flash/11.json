@@ -1,0 +1,48 @@
+{
+  "sample_id": "11",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:23.604310+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"我们周三上线，不对，是周五上线。还有两天可以完成测试。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"不对，是周五上线\", \"type\": \"repair\", \"reason\": \"说话人先说“周三”，随后用“不对”进行否定并修正为“周五”。\", \"start_s\": 1.36, \"end_s\": 2.84}], \"issues\": [], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "我们周三上线，不对，是周五上线。还有两天可以完成测试。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "不对，是周五上线",
+        "type": "repair",
+        "reason": "说话人先说“周三”，随后用“不对”进行否定并修正为“周五”。",
+        "start_s": 1.36,
+        "end_s": 2.84
+      }
+    ],
+    "issues": [],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 340,
+    "total_tokens": 489,
+    "completion_tokens": 149,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 44,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 149
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-94bba217-11aa-917b-8c08-0d1b1710ffe6",
+  "elapsed_s": 2.63
+}

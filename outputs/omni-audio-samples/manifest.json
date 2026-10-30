@@ -1,0 +1,1906 @@
+[
+  {
+    "id": "01",
+    "title": "干净表达对照",
+    "segments": [
+      {
+        "text": "我建议把上线时间推迟两天。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "因为支付接口还没有完成测试。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "今天先修复问题，明天再做回归测试。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "无刻意植入的垫词；不得为了凑问题而报告口头禅。",
+    "audio_file": "audio/01.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 9.596,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 2.694,
+        "text": "我建议把上线时间推迟两天。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 2.874,
+        "end_s": 5.544,
+        "text": "因为支付接口还没有完成测试。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 5.724,
+        "end_s": 9.416,
+        "text": "今天先修复问题，明天再做回归测试。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "我建议把上线时间推迟两天。 因为支付接口还没有完成测试。 今天先修复问题，明天再做回归测试。"
+  },
+  {
+    "id": "02",
+    "title": "同内容加入嗯",
+    "segments": [
+      {
+        "text": "嗯",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我建议把上线时间推迟两天。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "嗯",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "因为支付接口还没有完成测试。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "嗯",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "今天先修复问题，明天再做回归测试。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "与01配对；脚本植入3次嗯，检查是否遗漏或合并。",
+    "audio_file": "audio/02.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 10.902,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.256,
+        "text": "嗯",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.435,
+        "end_s": 3.129,
+        "text": "我建议把上线时间推迟两天。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.309,
+        "end_s": 3.565,
+        "text": "嗯",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.745,
+        "end_s": 6.415,
+        "text": "因为支付接口还没有完成测试。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 6.595,
+        "end_s": 6.85,
+        "text": "嗯",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 7.03,
+        "end_s": 10.723,
+        "text": "今天先修复问题，明天再做回归测试。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "嗯 我建议把上线时间推迟两天。 嗯 因为支付接口还没有完成测试。 嗯 今天先修复问题，明天再做回归测试。"
+  },
+  {
+    "id": "03",
+    "title": "啊与混合垫词",
+    "segments": [
+      {
+        "text": "啊",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我觉得这次会议需要缩短。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "啊",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "嗯",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "可以提前发材料，会上只讨论分歧。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "识别2次啊、1次嗯；不要把明确建议评价为没有观点。",
+    "audio_file": "audio/03.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 7.147,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.209,
+        "text": "啊",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.389,
+        "end_s": 2.525,
+        "text": "我觉得这次会议需要缩短。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 2.705,
+        "end_s": 2.914,
+        "text": "啊",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.094,
+        "end_s": 3.35,
+        "text": "嗯",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.53,
+        "end_s": 6.967,
+        "text": "可以提前发材料，会上只讨论分歧。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "啊 我觉得这次会议需要缩短。 啊 嗯 可以提前发材料，会上只讨论分歧。"
+  },
+  {
+    "id": "04",
+    "title": "呃与较长思考间隔",
+    "segments": [
+      {
+        "text": "呃",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 0.6
+      },
+      {
+        "text": "我的建议是先保留原来的方案。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "呃",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 1.0
+      },
+      {
+        "text": "等测试结果出来以后再调整。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "脚本有2次呃；同时存在静音，不得将静音计作额外垫词。",
+    "audio_file": "audio/04.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 7.8,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.279,
+        "text": "呃",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.459,
+        "end_s": 1.059,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 1.059,
+        "end_s": 3.45,
+        "text": "我的建议是先保留原来的方案。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.63,
+        "end_s": 3.909,
+        "text": "呃",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.089,
+        "end_s": 5.089,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 5.089,
+        "end_s": 7.62,
+        "text": "等测试结果出来以后再调整。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "呃 我的建议是先保留原来的方案。 呃 等测试结果出来以后再调整。"
+  },
+  {
+    "id": "05",
+    "title": "然后的机械重复",
+    "segments": [
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我想说的是先检查数据。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我们再决定要不要重跑。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "4次然后；识别重复连接成分，给出具体位置。",
+    "audio_file": "audio/05.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 7.257,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.557,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.737,
+        "end_s": 1.295,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.475,
+        "end_s": 3.518,
+        "text": "我想说的是先检查数据。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.698,
+        "end_s": 4.256,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.436,
+        "end_s": 4.993,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 5.173,
+        "end_s": 7.077,
+        "text": "我们再决定要不要重跑。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "然后 然后 我想说的是先检查数据。 然后 然后 我们再决定要不要重跑。"
+  },
+  {
+    "id": "06",
+    "title": "就是的机械重复",
+    "segments": [
+      {
+        "text": "就是",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "这个项目",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "就是",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "需要明确一个负责人。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "就是",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "避免每个人都以为别人在处理。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "3次就是为刻意植入的赘余成分；不要只评价逻辑。",
+    "audio_file": "audio/06.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 7.675,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.511,
+        "text": "就是",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.691,
+        "end_s": 1.434,
+        "text": "这个项目",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.614,
+        "end_s": 2.125,
+        "text": "就是",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 2.305,
+        "end_s": 4.116,
+        "text": "需要明确一个负责人。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.296,
+        "end_s": 4.807,
+        "text": "就是",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.987,
+        "end_s": 7.495,
+        "text": "避免每个人都以为别人在处理。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "就是 这个项目 就是 需要明确一个负责人。 就是 避免每个人都以为别人在处理。"
+  },
+  {
+    "id": "07",
+    "title": "这个作为垫词",
+    "segments": [
+      {
+        "text": "这个",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 0.5
+      },
+      {
+        "text": "我建议明天再讨论。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "这个",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 0.5
+      },
+      {
+        "text": "今天还缺少关键数据。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "2次这个用作犹豫成分；与16中的指示词用法区别。",
+    "audio_file": "audio/07.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 6.271,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.372,
+        "text": "这个",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.552,
+        "end_s": 1.052,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 1.052,
+        "end_s": 2.793,
+        "text": "我建议明天再讨论。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 2.973,
+        "end_s": 3.345,
+        "text": "这个",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.525,
+        "end_s": 4.025,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 4.025,
+        "end_s": 6.091,
+        "text": "今天还缺少关键数据。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "这个 我建议明天再讨论。 这个 今天还缺少关键数据。"
+  },
+  {
+    "id": "08",
+    "title": "那个作为垫词",
+    "segments": [
+      {
+        "text": "那个",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 0.5
+      },
+      {
+        "text": "我想补充一个风险。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "那个",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "如果供应商晚交付，我们就没有测试时间了。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "2次那个用作犹豫成分；与16配对。",
+    "audio_file": "audio/08.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 7.258,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.372,
+        "text": "那个",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.552,
+        "end_s": 1.052,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 1.052,
+        "end_s": 2.654,
+        "text": "我想补充一个风险。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 2.834,
+        "end_s": 3.205,
+        "text": "那个",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.385,
+        "end_s": 7.078,
+        "text": "如果供应商晚交付，我们就没有测试时间了。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "那个 我想补充一个风险。 那个 如果供应商晚交付，我们就没有测试时间了。"
+  },
+  {
+    "id": "09",
+    "title": "单字重复起句",
+    "segments": [
+      {
+        "text": "我",
+        "kind": "repetition",
+        "gap_after_s": 0.04
+      },
+      {
+        "text": "我",
+        "kind": "repetition",
+        "gap_after_s": 0.04
+      },
+      {
+        "text": "我觉得应该先确认需求。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "再开始画页面。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "保留我、我、我觉得的重复起句；这是合成重复，不代表临床口吃。",
+    "audio_file": "audio/09.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 4.573,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.302,
+        "text": "我",
+        "kind": "repetition",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.342,
+        "end_s": 0.644,
+        "text": "我",
+        "kind": "repetition",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.684,
+        "end_s": 2.797,
+        "text": "我觉得应该先确认需求。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 2.977,
+        "end_s": 4.393,
+        "text": "再开始画页面。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "我 我 我觉得应该先确认需求。 再开始画页面。"
+  },
+  {
+    "id": "10",
+    "title": "短语原样重复",
+    "segments": [
+      {
+        "text": "我的意思是",
+        "kind": "repetition",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我的意思是",
+        "kind": "repetition",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我们先确认预算。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "先确认预算",
+        "kind": "repetition",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "再决定买哪套设备。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "识别短语重复，不将其自动顺滑成一遍。",
+    "audio_file": "audio/10.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 7.03,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.906,
+        "text": "我的意思是",
+        "kind": "repetition",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.086,
+        "end_s": 1.991,
+        "text": "我的意思是",
+        "kind": "repetition",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 2.171,
+        "end_s": 3.611,
+        "text": "我们先确认预算。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.791,
+        "end_s": 4.998,
+        "text": "先确认预算",
+        "kind": "repetition",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 5.178,
+        "end_s": 6.85,
+        "text": "再决定买哪套设备。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "我的意思是 我的意思是 我们先确认预算。 先确认预算 再决定买哪套设备。"
+  },
+  {
+    "id": "11",
+    "title": "数字改口与自我修正",
+    "segments": [
+      {
+        "text": "我们周三上线。",
+        "kind": "repair",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 0.4
+      },
+      {
+        "text": "不对，是周五上线。",
+        "kind": "repair",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "还有两天可以完成测试。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "识别周三改为周五，最终安排为周五；不要把自我修正当垫词。",
+    "audio_file": "audio/11.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 6.141,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 1.208,
+        "text": "我们周三上线。",
+        "kind": "repair",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.788,
+        "end_s": 3.622,
+        "text": "不对，是周五上线。",
+        "kind": "repair",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.802,
+        "end_s": 5.962,
+        "text": "还有两天可以完成测试。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "我们周三上线。 不对，是周五上线。 还有两天可以完成测试。"
+  },
+  {
+    "id": "12",
+    "title": "未完成起句后重启",
+    "segments": [
+      {
+        "text": "我想先把这个需",
+        "kind": "restart",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 1.0
+      },
+      {
+        "text": "我重新说一下。",
+        "kind": "restart",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "先确认需求，再安排开发。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "保留未完成起句；属于人为拼接模拟，不能证明自然截断音节识别能力。",
+    "audio_file": "audio/12.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 6.904,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 1.417,
+        "text": "我想先把这个需",
+        "kind": "restart",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.597,
+        "end_s": 2.596,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 2.596,
+        "end_s": 3.897,
+        "text": "我重新说一下。",
+        "kind": "restart",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.077,
+        "end_s": 6.724,
+        "text": "先确认需求，再安排开发。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "我想先把这个需 我重新说一下。 先确认需求，再安排开发。"
+  },
+  {
+    "id": "13",
+    "title": "长停顿但无垫词",
+    "segments": [
+      {
+        "text": "我建议保留两个方案。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 2.5
+      },
+      {
+        "text": "等成本测算完成以后，再做选择。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "有额外2.5秒静音，无刻意植入垫词；暂停本身不能判为问题。",
+    "audio_file": "audio/13.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 7.852,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 1.788,
+        "text": "我建议保留两个方案。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.968,
+        "end_s": 4.468,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 4.468,
+        "end_s": 7.672,
+        "text": "等成本测算完成以后，再做选择。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "我建议保留两个方案。 等成本测算完成以后，再做选择。"
+  },
+  {
+    "id": "14",
+    "title": "然后的正常连接用法",
+    "segments": [
+      {
+        "text": "先登录系统，然后打开练习页面。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "录完以后先回听，然后查看分析结果。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "2次然后表达正常步骤关系，不应机械报告为口头禅。",
+    "audio_file": "audio/14.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 7.071,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 3.065,
+        "text": "先登录系统，然后打开练习页面。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.245,
+        "end_s": 6.891,
+        "text": "录完以后先回听，然后查看分析结果。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "先登录系统，然后打开练习页面。 录完以后先回听，然后查看分析结果。"
+  },
+  {
+    "id": "15",
+    "title": "就是的正常强调用法",
+    "segments": [
+      {
+        "text": "我们现在最需要解决的，就是录音上传失败的问题。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "责任人就是今天值班的工程师。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "2次就是有实际语义，不应仅按词表误报。",
+    "audio_file": "audio/15.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 7.233,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 4.273,
+        "text": "我们现在最需要解决的，就是录音上传失败的问题。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.453,
+        "end_s": 7.053,
+        "text": "责任人就是今天值班的工程师。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "我们现在最需要解决的，就是录音上传失败的问题。 责任人就是今天值班的工程师。"
+  },
+  {
+    "id": "16",
+    "title": "这个那个的正常指代",
+    "segments": [
+      {
+        "text": "这个方案成本低，那个方案上线快。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我倾向于这个方案，因为预算有限。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "这个2次、那个1次均为指代；不应判为3个垫词。",
+    "audio_file": "audio/16.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 6.537,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 3.042,
+        "text": "这个方案成本低，那个方案上线快。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.222,
+        "end_s": 6.357,
+        "text": "我倾向于这个方案，因为预算有限。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "这个方案成本低，那个方案上线快。 我倾向于这个方案，因为预算有限。"
+  },
+  {
+    "id": "17",
+    "title": "混合垫词基准",
+    "segments": [
+      {
+        "text": "嗯",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我建议",
+        "kind": "normal",
+        "gap_after_s": 0.1
+      },
+      {
+        "text": "就是",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "先做小范围试用。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "收集三位用户的反馈。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "这个",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 0.7
+      },
+      {
+        "text": "再决定是否正式上线。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "检查嗯1次、就是1次、然后连续2次、这个1次及额外静音；与19至22比较。",
+    "audio_file": "audio/17.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 10.577,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.256,
+        "text": "嗯",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.435,
+        "end_s": 1.086,
+        "text": "我建议",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.186,
+        "end_s": 1.697,
+        "text": "就是",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.877,
+        "end_s": 3.502,
+        "text": "先做小范围试用。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.682,
+        "end_s": 4.24,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.42,
+        "end_s": 4.977,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 5.157,
+        "end_s": 6.991,
+        "text": "收集三位用户的反馈。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 7.171,
+        "end_s": 7.543,
+        "text": "这个",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 7.723,
+        "end_s": 8.423,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 8.423,
+        "end_s": 10.397,
+        "text": "再决定是否正式上线。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "嗯 我建议 就是 先做小范围试用。 然后 然后 收集三位用户的反馈。 这个 再决定是否正式上线。"
+  },
+  {
+    "id": "18",
+    "title": "逻辑薄弱但无垫词",
+    "segments": [
+      {
+        "text": "我认为应该立即上线。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "因为办公室的椅子换了颜色。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "所以上线风险肯定很低。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "观点理由缺乏相关性；无刻意垫词，不应混淆内容问题与声音问题。",
+    "audio_file": "audio/18.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 6.879,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 1.811,
+        "text": "我认为应该立即上线。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.991,
+        "end_s": 4.197,
+        "text": "因为办公室的椅子换了颜色。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.377,
+        "end_s": 6.699,
+        "text": "所以上线风险肯定很低。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "我认为应该立即上线。 因为办公室的椅子换了颜色。 所以上线风险肯定很低。"
+  },
+  {
+    "id": "19",
+    "title": "混合垫词慢速",
+    "segments": [
+      {
+        "text": "嗯",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我建议",
+        "kind": "normal",
+        "gap_after_s": 0.1
+      },
+      {
+        "text": "就是",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "先做小范围试用。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "收集三位用户的反馈。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "这个",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 0.7
+      },
+      {
+        "text": "再决定是否正式上线。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "与17内容相同，仅合成速率改变；观察漏报变化。",
+    "rate": 135,
+    "audio_file": "audio/19.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 135,
+    "duration_s": 13.409,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.348,
+        "text": "嗯",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.528,
+        "end_s": 1.388,
+        "text": "我建议",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.488,
+        "end_s": 2.161,
+        "text": "就是",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 2.341,
+        "end_s": 4.524,
+        "text": "先做小范围试用。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.704,
+        "end_s": 5.447,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 5.627,
+        "end_s": 6.37,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 6.55,
+        "end_s": 9.011,
+        "text": "收集三位用户的反馈。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 9.191,
+        "end_s": 9.702,
+        "text": "这个",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 9.882,
+        "end_s": 10.582,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 10.582,
+        "end_s": 13.229,
+        "text": "再决定是否正式上线。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "嗯 我建议 就是 先做小范围试用。 然后 然后 收集三位用户的反馈。 这个 再决定是否正式上线。"
+  },
+  {
+    "id": "20",
+    "title": "混合垫词快速",
+    "segments": [
+      {
+        "text": "嗯",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我建议",
+        "kind": "normal",
+        "gap_after_s": 0.1
+      },
+      {
+        "text": "就是",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "先做小范围试用。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "收集三位用户的反馈。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "这个",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 0.7
+      },
+      {
+        "text": "再决定是否正式上线。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "与17内容相同，仅合成速率改变；观察漏报变化。",
+    "rate": 245,
+    "audio_file": "audio/20.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 245,
+    "duration_s": 7.117,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.163,
+        "text": "嗯",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.343,
+        "end_s": 0.714,
+        "text": "我建议",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.814,
+        "end_s": 1.116,
+        "text": "就是",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.296,
+        "end_s": 2.248,
+        "text": "先做小范围试用。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 2.428,
+        "end_s": 2.753,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 2.933,
+        "end_s": 3.259,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.439,
+        "end_s": 4.507,
+        "text": "收集三位用户的反馈。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.687,
+        "end_s": 4.919,
+        "text": "这个",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 5.099,
+        "end_s": 5.799,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 5.799,
+        "end_s": 6.937,
+        "text": "再决定是否正式上线。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "嗯 我建议 就是 先做小范围试用。 然后 然后 收集三位用户的反馈。 这个 再决定是否正式上线。"
+  },
+  {
+    "id": "21",
+    "title": "仅垫词降低音量",
+    "segments": [
+      {
+        "text": "嗯",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我建议",
+        "kind": "normal",
+        "gap_after_s": 0.1
+      },
+      {
+        "text": "就是",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "先做小范围试用。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "收集三位用户的反馈。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "这个",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 0.7
+      },
+      {
+        "text": "再决定是否正式上线。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "仅filler片段降低约18dB；主体音量不变，检查轻声垫词漏报。",
+    "filler_gain": 0.126,
+    "audio_file": "audio/21.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 10.577,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.256,
+        "text": "嗯",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.435,
+        "end_s": 1.086,
+        "text": "我建议",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.186,
+        "end_s": 1.697,
+        "text": "就是",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.877,
+        "end_s": 3.502,
+        "text": "先做小范围试用。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.682,
+        "end_s": 4.24,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.42,
+        "end_s": 4.977,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 5.157,
+        "end_s": 6.991,
+        "text": "收集三位用户的反馈。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 7.171,
+        "end_s": 7.543,
+        "text": "这个",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 7.723,
+        "end_s": 8.423,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 8.423,
+        "end_s": 10.397,
+        "text": "再决定是否正式上线。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "嗯 我建议 就是 先做小范围试用。 然后 然后 收集三位用户的反馈。 这个 再决定是否正式上线。"
+  },
+  {
+    "id": "22",
+    "title": "混合垫词加底噪",
+    "segments": [
+      {
+        "text": "嗯",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "我建议",
+        "kind": "normal",
+        "gap_after_s": 0.1
+      },
+      {
+        "text": "就是",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "先做小范围试用。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "然后",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "收集三位用户的反馈。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "这个",
+        "kind": "filler",
+        "gap_after_s": 0.18
+      },
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 0.7
+      },
+      {
+        "text": "再决定是否正式上线。",
+        "kind": "normal",
+        "gap_after_s": 0.18
+      }
+    ],
+    "expected_checks": "与17同一合成源，加入确定性白噪声，目标全片SNR为20dB；不是实际办公室录音。",
+    "snr_db": 20,
+    "audio_file": "audio/22.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 10.577,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 0.256,
+        "text": "嗯",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 0.435,
+        "end_s": 1.086,
+        "text": "我建议",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.186,
+        "end_s": 1.697,
+        "text": "就是",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 1.877,
+        "end_s": 3.502,
+        "text": "先做小范围试用。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 3.682,
+        "end_s": 4.24,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 4.42,
+        "end_s": 4.977,
+        "text": "然后",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 5.157,
+        "end_s": 6.991,
+        "text": "收集三位用户的反馈。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 7.171,
+        "end_s": 7.543,
+        "text": "这个",
+        "kind": "filler",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      },
+      {
+        "start_s": 7.723,
+        "end_s": 8.423,
+        "text": "",
+        "kind": "inserted_silence"
+      },
+      {
+        "start_s": 8.423,
+        "end_s": 10.397,
+        "text": "再决定是否正式上线。",
+        "kind": "normal",
+        "timing_basis": "synthesis segment boundary; not phoneme/word alignment"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": "嗯 我建议 就是 先做小范围试用。 然后 然后 收集三位用户的反馈。 这个 再决定是否正式上线。"
+  },
+  {
+    "id": "23",
+    "title": "纯静音阴性对照",
+    "segments": [
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 8.0
+      }
+    ],
+    "expected_checks": "无语音；不得编造转写、垫词、观点或人物情绪。",
+    "audio_file": "audio/23.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 8.0,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 8.0,
+        "text": "",
+        "kind": "inserted_silence"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": ""
+  },
+  {
+    "id": "24",
+    "title": "纯噪声阴性对照",
+    "segments": [
+      {
+        "text": "",
+        "kind": "silence",
+        "gap_after_s": 8.0
+      }
+    ],
+    "expected_checks": "仅合成白噪声，无语音；不得幻觉出嗯啊或句子。",
+    "noise_only": true,
+    "audio_file": "audio/24.wav",
+    "voice": "Tingting",
+    "synthesis_rate": 185,
+    "duration_s": 8.0,
+    "sample_rate": 16000,
+    "channels": 1,
+    "clipped_samples": 0,
+    "timeline": [
+      {
+        "start_s": 0.0,
+        "end_s": 8.0,
+        "text": "",
+        "kind": "inserted_silence"
+      }
+    ],
+    "reference_status": "script_reference_not_human_audio_verified",
+    "reference_text": ""
+  }
+]

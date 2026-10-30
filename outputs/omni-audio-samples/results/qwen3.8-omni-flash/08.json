@@ -1,0 +1,54 @@
+{
+  "sample_id": "08",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:17.967517+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"那个，我想补充一个风险。那个，如果供应商晚交付，我们就没有测试时间了。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 0, \"那个\": 2}, \"observations\": [{\"quote\": \"那个，我想补充一个风险。那个，如果供应商晚交付……\", \"type\": \"filler\", \"reason\": \"“那个”在句中作为口头垫词使用，用于开启话题或争取思考时间，属于冗余填充。\", \"start_s\": 0.48, \"end_s\": 6.92}], \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"两次使用“那个”作为句首垫词（0.48s-1.04s, 3.52s-4.08s）。\", \"suggestion\": \"尝试去掉这些无意义的垫词，直接说出核心内容：“我想补充一个风险：如果供应商晚交付，我们就没有测试时间了。”\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "那个，我想补充一个风险。那个，如果供应商晚交付，我们就没有测试时间了。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 0,
+      "那个": 2
+    },
+    "observations": [
+      {
+        "quote": "那个，我想补充一个风险。那个，如果供应商晚交付……",
+        "type": "filler",
+        "reason": "“那个”在句中作为口头垫词使用，用于开启话题或争取思考时间，属于冗余填充。",
+        "start_s": 0.48,
+        "end_s": 6.92
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "两次使用“那个”作为句首垫词（0.48s-1.04s, 3.52s-4.08s）。",
+        "suggestion": "尝试去掉这些无意义的垫词，直接说出核心内容：“我想补充一个风险：如果供应商晚交付，我们就没有测试时间了。”"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 347,
+    "total_tokens": 601,
+    "completion_tokens": 254,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 51,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 254
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-301fdf91-ffc9-969c-b30a-9ebed2ef4b79",
+  "elapsed_s": 5.54
+}

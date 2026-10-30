@@ -1,0 +1,55 @@
+{
+  "sample_id": "14",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:00.561636+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"先登录系统，然后打开练习页面。录完以后先回听，然后查看分析结果。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 2, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"然后\", \"type\": \"normal\", \"reason\": \"作为连词，自然衔接前后动作步骤。\", \"start_s\": 1.56, \"end_s\": 2.04}, {\"quote\": \"然后\", \"type\": \"normal\", \"reason\": \"作为连词，自然衔接前后动作步骤。\", \"start_s\": 5.8, \"end_s\": 6.28}], \"issues\": [], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "先登录系统，然后打开练习页面。录完以后先回听，然后查看分析结果。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 2,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "然后",
+        "type": "normal",
+        "reason": "作为连词，自然衔接前后动作步骤。",
+        "start_s": 1.56,
+        "end_s": 2.04
+      },
+      {
+        "quote": "然后",
+        "type": "normal",
+        "reason": "作为连词，自然衔接前后动作步骤。",
+        "start_s": 5.8,
+        "end_s": 6.28
+      }
+    ],
+    "issues": [],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 347,
+    "total_tokens": 533,
+    "completion_tokens": 186,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 51,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 186
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-99975b1b-5c36-9684-a27a-fab23d8dd32f",
+  "elapsed_s": 3.87
+}

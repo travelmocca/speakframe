@@ -1,0 +1,247 @@
+{
+  "checkedAt": "2026-10-30T15:46:47.804Z",
+  "checks": [
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "auth",
+      "width": 320,
+      "documentWidth": 320,
+      "title": "表达练习",
+      "inputs": 2,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "auth",
+      "width": 375,
+      "documentWidth": 375,
+      "title": "表达练习",
+      "inputs": 2,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "auth",
+      "width": 390,
+      "documentWidth": 390,
+      "title": "表达练习",
+      "inputs": 2,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "auth",
+      "width": 768,
+      "documentWidth": 768,
+      "title": "表达练习",
+      "inputs": 2,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "auth",
+      "width": 1024,
+      "documentWidth": 1024,
+      "title": "表达练习",
+      "inputs": 2,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "auth",
+      "width": 1280,
+      "documentWidth": 1280,
+      "title": "表达练习",
+      "inputs": 2,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "auth",
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "表达练习",
+      "inputs": 2,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "auth",
+      "width": 1920,
+      "documentWidth": 1920,
+      "title": "表达练习",
+      "inputs": 2,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "list",
+      "width": 320,
+      "documentWidth": 320,
+      "title": "表达练习",
+      "inputs": 0,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "list",
+      "width": 375,
+      "documentWidth": 375,
+      "title": "表达练习",
+      "inputs": 0,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "list",
+      "width": 390,
+      "documentWidth": 390,
+      "title": "表达练习",
+      "inputs": 0,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "list",
+      "width": 768,
+      "documentWidth": 768,
+      "title": "表达练习",
+      "inputs": 0,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "list",
+      "width": 1024,
+      "documentWidth": 1024,
+      "title": "表达练习",
+      "inputs": 0,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "list",
+      "width": 1280,
+      "documentWidth": 1280,
+      "title": "表达练习",
+      "inputs": 0,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "list",
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "表达练习",
+      "inputs": 0,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "list",
+      "width": 1920,
+      "documentWidth": 1920,
+      "title": "表达练习",
+      "inputs": 0,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "workbench",
+      "width": 320,
+      "documentWidth": 320,
+      "title": "表达练习",
+      "inputs": 1,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "workbench",
+      "width": 375,
+      "documentWidth": 375,
+      "title": "表达练习",
+      "inputs": 1,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "workbench",
+      "width": 390,
+      "documentWidth": 390,
+      "title": "表达练习",
+      "inputs": 1,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "workbench",
+      "width": 768,
+      "documentWidth": 768,
+      "title": "表达练习",
+      "inputs": 1,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "workbench",
+      "width": 1024,
+      "documentWidth": 1024,
+      "title": "表达练习",
+      "inputs": 1,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "workbench",
+      "width": 1280,
+      "documentWidth": 1280,
+      "title": "表达练习",
+      "inputs": 1,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "workbench",
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "表达练习",
+      "inputs": 1,
+      "passed": true
+    },
+    {
+      "engine": "chromium",
+      "browserVersion": "156.0.8078.74",
+      "page": "workbench",
+      "width": 1920,
+      "documentWidth": 1920,
+      "title": "表达练习",
+      "inputs": 1,
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "limitation": "WebKit is the frozen macOS 14 Playwright engine; not a claim about current Safari or physical phones."
+}

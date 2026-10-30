@@ -1,0 +1,80 @@
+{
+  "sample_id": "22",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:06:23.136127+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"嗯，我建议就是先做小范围试用，然后、然后收集三位用户的反馈这个，再决定是否正式上线。\", \"counts\": {\"嗯\": 1, \"啊\": 0, \"呃\": 0, \"然后\": 2, \"就是\": 1, \"这个\": 1, \"那个\": 0}, \"observations\": [{\"quote\": \"嗯\", \"type\": \"filler\", \"reason\": \"句首语气垫词，用于引起注意或思考停顿。\", \"start_s\": 0.08, \"end_s\": 0.48}, {\"quote\": \"就是\", \"type\": \"normal\", \"reason\": \"正常连接词，引出具体建议内容。\", \"start_s\": 0.96, \"end_s\": 1.36}, {\"quote\": \"然后、然后\", \"type\": \"repetition\", \"reason\": \"连续重复使用“然后”，属于口语中的衔接重启。\", \"start_s\": 2.56, \"end_s\": 3.36}, {\"quote\": \"这个\", \"type\": \"filler\", \"reason\": \"无明确指代对象的口头禅，作为话语填充物。\", \"start_s\": 6.72, \"end_s\": 7.12}], \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"句末出现无指代对象的“这个”。\", \"suggestion\": \"删除该词，使句子更简洁流畅。\"}, {\"dimension\": \"衔接与恢复\", \"evidence\": \"中间连续重复了两次“然后”。\", \"suggestion\": \"保留一个“然后”即可，或直接去掉以加快语速。\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "嗯，我建议就是先做小范围试用，然后、然后收集三位用户的反馈这个，再决定是否正式上线。",
+    "counts": {
+      "嗯": 1,
+      "啊": 0,
+      "呃": 0,
+      "然后": 2,
+      "就是": 1,
+      "这个": 1,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "嗯",
+        "type": "filler",
+        "reason": "句首语气垫词，用于引起注意或思考停顿。",
+        "start_s": 0.08,
+        "end_s": 0.48
+      },
+      {
+        "quote": "就是",
+        "type": "normal",
+        "reason": "正常连接词，引出具体建议内容。",
+        "start_s": 0.96,
+        "end_s": 1.36
+      },
+      {
+        "quote": "然后、然后",
+        "type": "repetition",
+        "reason": "连续重复使用“然后”，属于口语中的衔接重启。",
+        "start_s": 2.56,
+        "end_s": 3.36
+      },
+      {
+        "quote": "这个",
+        "type": "filler",
+        "reason": "无明确指代对象的口头禅，作为话语填充物。",
+        "start_s": 6.72,
+        "end_s": 7.12
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "句末出现无指代对象的“这个”。",
+        "suggestion": "删除该词，使句子更简洁流畅。"
+      },
+      {
+        "dimension": "衔接与恢复",
+        "evidence": "中间连续重复了两次“然后”。",
+        "suggestion": "保留一个“然后”即可，或直接去掉以加快语速。"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 523,
+    "total_tokens": 903,
+    "completion_tokens": 380,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 72,
+      "text_tokens": 451
+    },
+    "completion_tokens_details": {
+      "text_tokens": 380
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-29ffd9d7-e60d-9fa2-ace2-283e6995a823",
+  "elapsed_s": 5.61
+}

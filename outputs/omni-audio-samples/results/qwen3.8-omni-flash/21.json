@@ -1,0 +1,75 @@
+{
+  "sample_id": "21",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:39.880920+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"嗯，我建议就是先做小范围试用，然后，然后收集三位用户的反馈，这个……再决定是否正式上线。\", \"counts\": {\"嗯\": 1, \"啊\": 0, \"呃\": 0, \"然后\": 2, \"就是\": 1, \"这个\": 1, \"那个\": 0}, \"observations\": [{\"quote\": \"嗯\", \"type\": \"filler\", \"reason\": \"句首语气词，用于引起注意或思考停顿。\", \"start_s\": 0.32, \"end_s\": 0.48}, {\"quote\": \"就是\", \"type\": \"normal\", \"reason\": \"此处作为连接词，引出具体建议内容，属于正常口语表达。\", \"start_s\": 1.2, \"end_s\": 1.56}, {\"quote\": \"然后，然后\", \"type\": \"repetition\", \"reason\": \"连续重复使用“然后”，属于口语中的结巴或思考停顿导致的重复。\", \"start_s\": 3.28, \"end_s\": 4.2}, {\"quote\": \"这个\", \"type\": \"filler\", \"reason\": \"在句子中间出现的无实意指代词，起到拖长音、争取思考时间的作用。\", \"start_s\": 6.72, \"end_s\": 7.04}], \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"然后，然后；这个……\", \"suggestion\": \"尽量减少不必要的重复连接词和无意义的指代词（如“这个”），使表达更流畅紧凑。\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "嗯，我建议就是先做小范围试用，然后，然后收集三位用户的反馈，这个……再决定是否正式上线。",
+    "counts": {
+      "嗯": 1,
+      "啊": 0,
+      "呃": 0,
+      "然后": 2,
+      "就是": 1,
+      "这个": 1,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "嗯",
+        "type": "filler",
+        "reason": "句首语气词，用于引起注意或思考停顿。",
+        "start_s": 0.32,
+        "end_s": 0.48
+      },
+      {
+        "quote": "就是",
+        "type": "normal",
+        "reason": "此处作为连接词，引出具体建议内容，属于正常口语表达。",
+        "start_s": 1.2,
+        "end_s": 1.56
+      },
+      {
+        "quote": "然后，然后",
+        "type": "repetition",
+        "reason": "连续重复使用“然后”，属于口语中的结巴或思考停顿导致的重复。",
+        "start_s": 3.28,
+        "end_s": 4.2
+      },
+      {
+        "quote": "这个",
+        "type": "filler",
+        "reason": "在句子中间出现的无实意指代词，起到拖长音、争取思考时间的作用。",
+        "start_s": 6.72,
+        "end_s": 7.04
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "然后，然后；这个……",
+        "suggestion": "尽量减少不必要的重复连接词和无意义的指代词（如“这个”），使表达更流畅紧凑。"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 368,
+    "total_tokens": 730,
+    "completion_tokens": 362,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 72,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 362
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-5a85334f-dc1b-9825-8695-d4818a189a3b",
+  "elapsed_s": 6.66
+}

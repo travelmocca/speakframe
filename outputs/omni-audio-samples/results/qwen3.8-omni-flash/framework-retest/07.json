@@ -1,0 +1,54 @@
+{
+  "sample_id": "07",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:06:13.930089+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"这个我建议明天再讨论。这个今天还缺少关键数据。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 2, \"那个\": 0}, \"observations\": [{\"quote\": \"这个我建议明天再讨论。这个今天还缺少关键数据。\", \"type\": \"repetition\", \"reason\": \"句首重复使用“这个”，属于口语中常见的停顿和重启现象，略显冗余。\", \"start_s\": 0.16, \"end_s\": 5.84}], \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"两句话均以“这个”开头，存在重复使用的情况。\", \"suggestion\": \"在正式表达时，可以尝试去掉句首的“这个”，直接陈述观点，使语言更精炼。\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "这个我建议明天再讨论。这个今天还缺少关键数据。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 2,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "这个我建议明天再讨论。这个今天还缺少关键数据。",
+        "type": "repetition",
+        "reason": "句首重复使用“这个”，属于口语中常见的停顿和重启现象，略显冗余。",
+        "start_s": 0.16,
+        "end_s": 5.84
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "两句话均以“这个”开头，存在重复使用的情况。",
+        "suggestion": "在正式表达时，可以尝试去掉句首的“这个”，直接陈述观点，使语言更精炼。"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 495,
+    "total_tokens": 707,
+    "completion_tokens": 212,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 44,
+      "text_tokens": 451
+    },
+    "completion_tokens_details": {
+      "text_tokens": 212
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-e7aaf780-f6d1-97ad-ba2b-c2459a4cb010",
+  "elapsed_s": 3.48
+}

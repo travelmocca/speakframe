@@ -1,0 +1,75 @@
+{
+  "sample_id": "22",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:41.549523+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"嗯，我建议就是先做小范围试用，然后……然后收集三位用户的反馈，这个……再决定是否正式上线。\", \"counts\": {\"嗯\": 1, \"啊\": 0, \"呃\": 0, \"然后\": 2, \"就是\": 1, \"这个\": 1, \"那个\": 0}, \"observations\": [{\"quote\": \"嗯\", \"type\": \"filler\", \"reason\": \"句首语气垫词，用于思考停顿。\", \"start_s\": 0.08, \"end_s\": 0.32}, {\"quote\": \"就是\", \"type\": \"normal\", \"reason\": \"正常口语连接词，引出具体建议内容。\", \"start_s\": 0.56, \"end_s\": 0.96}, {\"quote\": \"然后……然后\", \"type\": \"repetition\", \"reason\": \"连续重复使用“然后”，属于口语中的结巴或思考停顿。\", \"start_s\": 4.08, \"end_s\": 5.36}, {\"quote\": \"这个\", \"type\": \"filler\", \"reason\": \"句中垫词，用于衔接上下文并争取思考时间。\", \"start_s\": 7.6, \"end_s\": 7.92}], \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"使用了“嗯”、“就是”、“这个”等垫词，且出现了“然后……然后”的重复。\", \"suggestion\": \"在正式表达时，尽量减少无意义的语气垫词，避免连续重复同一个连接词，以保持语流的连贯性。\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "嗯，我建议就是先做小范围试用，然后……然后收集三位用户的反馈，这个……再决定是否正式上线。",
+    "counts": {
+      "嗯": 1,
+      "啊": 0,
+      "呃": 0,
+      "然后": 2,
+      "就是": 1,
+      "这个": 1,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "嗯",
+        "type": "filler",
+        "reason": "句首语气垫词，用于思考停顿。",
+        "start_s": 0.08,
+        "end_s": 0.32
+      },
+      {
+        "quote": "就是",
+        "type": "normal",
+        "reason": "正常口语连接词，引出具体建议内容。",
+        "start_s": 0.56,
+        "end_s": 0.96
+      },
+      {
+        "quote": "然后……然后",
+        "type": "repetition",
+        "reason": "连续重复使用“然后”，属于口语中的结巴或思考停顿。",
+        "start_s": 4.08,
+        "end_s": 5.36
+      },
+      {
+        "quote": "这个",
+        "type": "filler",
+        "reason": "句中垫词，用于衔接上下文并争取思考时间。",
+        "start_s": 7.6,
+        "end_s": 7.92
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "使用了“嗯”、“就是”、“这个”等垫词，且出现了“然后……然后”的重复。",
+        "suggestion": "在正式表达时，尽量减少无意义的语气垫词，避免连续重复同一个连接词，以保持语流的连贯性。"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 368,
+    "total_tokens": 735,
+    "completion_tokens": 367,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 72,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 367
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-f3900e20-d1fe-9815-a1a0-1c6f69782672",
+  "elapsed_s": 4.48
+}

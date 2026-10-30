@@ -1,0 +1,61 @@
+{
+  "sample_id": "10",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:23.509153+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"我的意思是，我的意思是我们先确认预算，先确认预算，再决定买哪套设备。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"我的意思是，我的意思是\", \"type\": \"repetition\", \"reason\": \"说话人重复了相同的短语“我的意思是”，属于口误或强调性重复。\", \"start_s\": 0.16, \"end_s\": 2.32}, {\"quote\": \"先确认预算，先确认预算\", \"type\": \"repetition\", \"reason\": \"说话人重复了相同的短语“先确认预算”，属于口误或强调性重复。\", \"start_s\": 3.48, \"end_s\": 5.4}] , \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"我的意思是，我的意思是；先确认预算，先确认预算\", \"suggestion\": \"在表达时尽量放慢语速，想好再说，避免不必要的词语重复，使表达更流畅自然。\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "我的意思是，我的意思是我们先确认预算，先确认预算，再决定买哪套设备。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "我的意思是，我的意思是",
+        "type": "repetition",
+        "reason": "说话人重复了相同的短语“我的意思是”，属于口误或强调性重复。",
+        "start_s": 0.16,
+        "end_s": 2.32
+      },
+      {
+        "quote": "先确认预算，先确认预算",
+        "type": "repetition",
+        "reason": "说话人重复了相同的短语“先确认预算”，属于口误或强调性重复。",
+        "start_s": 3.48,
+        "end_s": 5.4
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "我的意思是，我的意思是；先确认预算，先确认预算",
+        "suggestion": "在表达时尽量放慢语速，想好再说，避免不必要的词语重复，使表达更流畅自然。"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 347,
+    "total_tokens": 622,
+    "completion_tokens": 275,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 51,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 275
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-70f38d98-b8f9-91d3-9505-73cc4c467768",
+  "elapsed_s": 3.93
+}

@@ -1,0 +1,62 @@
+{
+  "sample_id": "16",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:29.412686+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"这个方案成本低，那个方案上线快。我倾向于这个方案，因为预算有限。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 2, \"那个\": 1}, \"observations\": [{\"quote\": \"这个方案成本低\", \"type\": \"normal\", \"reason\": \"指示代词“这个”用于指代当前讨论的方案，属于正常用法。\", \"start_s\": 0.08, \"end_s\": 1.36}, {\"quote\": \"那个方案上线快\", \"type\": \"normal\", \"reason\": \"指示代词“那个”用于指代对比的另一方案，属于正常用法。\", \"start_s\": 1.44, \"end_s\": 2.56}, {\"quote\": \"我倾向于这个方案\", \"type\": \"normal\", \"reason\": \"指示代词“这个”再次指代第一个方案，属于正常用法。\", \"start_s\": 2.96, \"end_s\": 4.0}] , \"issues\": [], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "这个方案成本低，那个方案上线快。我倾向于这个方案，因为预算有限。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 2,
+      "那个": 1
+    },
+    "observations": [
+      {
+        "quote": "这个方案成本低",
+        "type": "normal",
+        "reason": "指示代词“这个”用于指代当前讨论的方案，属于正常用法。",
+        "start_s": 0.08,
+        "end_s": 1.36
+      },
+      {
+        "quote": "那个方案上线快",
+        "type": "normal",
+        "reason": "指示代词“那个”用于指代对比的另一方案，属于正常用法。",
+        "start_s": 1.44,
+        "end_s": 2.56
+      },
+      {
+        "quote": "我倾向于这个方案",
+        "type": "normal",
+        "reason": "指示代词“这个”再次指代第一个方案，属于正常用法。",
+        "start_s": 2.96,
+        "end_s": 4.0
+      }
+    ],
+    "issues": [],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 340,
+    "total_tokens": 599,
+    "completion_tokens": 259,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 44,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 259
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-3318bab8-0228-9e84-9538-bd9500555d30",
+  "elapsed_s": 3.44
+}

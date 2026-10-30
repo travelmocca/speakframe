@@ -1,0 +1,25 @@
+[
+ {
+  "scope": "app",
+  "shape": "app screen",
+  "theme": "dose",
+  "axes": "light/grotesk-sans/chromatic-green",
+  "hero": "none, application workbench",
+  "nav": "top bar",
+  "footer": "quiet product line",
+  "imagery": "real audio and transcripts",
+  "photos": [],
+  "entry": "recording workbench",
+  "signature": "recorded voice beside quoted feedback",
+  "sections": [
+   "auth",
+   "practice history",
+   "recording and review",
+   "retry comparison"
+  ],
+  "waived": [],
+  "prompt": "Adult Chinese expression practice website with three application screens",
+  "date": "2026-10-30",
+  "mode": "build"
+ }
+]

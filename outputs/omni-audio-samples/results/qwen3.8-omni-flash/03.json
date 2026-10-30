@@ -1,0 +1,54 @@
+{
+  "sample_id": "03",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:08.021169+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"啊，我觉得这次会议需要缩短。啊嗯，可以提前发材料，会上只讨论分歧。\", \"counts\": {\"嗯\": 1, \"啊\": 2, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"啊，我觉得这次会议需要缩短。啊嗯，可以提前发材料\", \"type\": \"filler\", \"reason\": \"句首及句中停顿处使用了“啊”、“嗯”等无实义的语气垫词。\", \"start_s\": 0.08, \"end_s\": 4.96}], \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"在表达观点前和转换话题时，多次使用“啊”、“嗯”作为填充。\", \"suggestion\": \"建议在思考或停顿时尽量保持沉默，减少不必要的语气词，使表达更干练。\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "啊，我觉得这次会议需要缩短。啊嗯，可以提前发材料，会上只讨论分歧。",
+    "counts": {
+      "嗯": 1,
+      "啊": 2,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "啊，我觉得这次会议需要缩短。啊嗯，可以提前发材料",
+        "type": "filler",
+        "reason": "句首及句中停顿处使用了“啊”、“嗯”等无实义的语气垫词。",
+        "start_s": 0.08,
+        "end_s": 4.96
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "在表达观点前和转换话题时，多次使用“啊”、“嗯”作为填充。",
+        "suggestion": "建议在思考或停顿时尽量保持沉默，减少不必要的语气词，使表达更干练。"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 347,
+    "total_tokens": 575,
+    "completion_tokens": 228,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 51,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 228
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-ea8cc3a0-d926-997f-a5d3-dc21d68ca2ce",
+  "elapsed_s": 3.81
+}

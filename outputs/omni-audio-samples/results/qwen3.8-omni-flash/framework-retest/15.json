@@ -1,0 +1,55 @@
+{
+  "sample_id": "15",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:06:17.412960+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"我们现在最需要解决的就是录音上传失败的问题，责任人就是今天值班的工程师。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 2, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"就是\", \"type\": \"normal\", \"reason\": \"用于解释说明前文提到的“需要解决的”具体内容，属于正常的连接词用法。\", \"start_s\": 3.48, \"end_s\": 3.76}, {\"quote\": \"就是\", \"type\": \"normal\", \"reason\": \"用于明确指代责任归属，属于正常的连接词用法。\", \"start_s\": 9.12, \"end_s\": 9.4}], \"issues\": [], \"uncertainty\": null}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "我们现在最需要解决的就是录音上传失败的问题，责任人就是今天值班的工程师。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 2,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "就是",
+        "type": "normal",
+        "reason": "用于解释说明前文提到的“需要解决的”具体内容，属于正常的连接词用法。",
+        "start_s": 3.48,
+        "end_s": 3.76
+      },
+      {
+        "quote": "就是",
+        "type": "normal",
+        "reason": "用于明确指代责任归属，属于正常的连接词用法。",
+        "start_s": 9.12,
+        "end_s": 9.4
+      }
+    ],
+    "issues": [],
+    "uncertainty": null
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 502,
+    "total_tokens": 694,
+    "completion_tokens": 192,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 51,
+      "text_tokens": 451
+    },
+    "completion_tokens_details": {
+      "text_tokens": 192
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-65ab7e2d-f3ea-9a1a-ac1c-23ccdd3a25bc",
+  "elapsed_s": 3.93
+}

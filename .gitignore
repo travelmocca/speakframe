@@ -1,0 +1,14 @@
+.env
+.env.*
+/*apiKey*.csv
+__pycache__/
+!.env.example
+node_modules/
+.next/
+var/
+var-test*/
+*.tsbuildinfo
+test-results/
+playwright-report/
+.hallmark/shots/
+outputs/*.zip

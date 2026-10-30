@@ -1,0 +1,55 @@
+{
+  "sample_id": "02",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:00.558736+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"嗯，我建议把上线时间推迟两天。嗯，因为支付接口还没有完成测试，今天先修复问题，明天再做回归测试。\", \"counts\": {\"嗯\": 2, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"嗯\", \"type\": \"filler\", \"reason\": \"句首语气垫词，用于引起注意或思考停顿。\", \"start_s\": 0.16, \"end_s\": 0.48}, {\"quote\": \"嗯\", \"type\": \"filler\", \"reason\": \"句中语气垫词，作为前后两个分句之间的自然过渡和停顿。\", \"start_s\": 3.92, \"end_s\": 4.16}], \"issues\": [], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "嗯，我建议把上线时间推迟两天。嗯，因为支付接口还没有完成测试，今天先修复问题，明天再做回归测试。",
+    "counts": {
+      "嗯": 2,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "嗯",
+        "type": "filler",
+        "reason": "句首语气垫词，用于引起注意或思考停顿。",
+        "start_s": 0.16,
+        "end_s": 0.48
+      },
+      {
+        "quote": "嗯",
+        "type": "filler",
+        "reason": "句中语气垫词，作为前后两个分句之间的自然过渡和停顿。",
+        "start_s": 3.92,
+        "end_s": 4.16
+      }
+    ],
+    "issues": [],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 368,
+    "total_tokens": 573,
+    "completion_tokens": 205,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 72,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 205
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-8afeab40-a688-9a41-9f83-7a3c028b05e8",
+  "elapsed_s": 3.05
+}

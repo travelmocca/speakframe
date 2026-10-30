@@ -1,0 +1,40 @@
+{
+  "sample_id": "01",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:08.014893+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"我建议把上线时间推迟两天，因为支付接口还没有完成测试。今天先修复问题，明天再做回归测试。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [], \"issues\": [], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "我建议把上线时间推迟两天，因为支付接口还没有完成测试。今天先修复问题，明天再做回归测试。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [],
+    "issues": [],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 361,
+    "total_tokens": 458,
+    "completion_tokens": 97,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 65,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 97
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-af6d0b2e-6269-9cb0-99bd-eb0a47ae90db",
+  "elapsed_s": 1.99
+}

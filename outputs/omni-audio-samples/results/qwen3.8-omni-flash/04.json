@@ -1,0 +1,61 @@
+{
+  "sample_id": "04",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:10.005887+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"呃，我的建议是先保留原来的方案，呃，等测试结果出来以后再调整。\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 2, \"然后\": 0, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [{\"quote\": \"呃\", \"type\": \"filler\", \"reason\": \"句首语气垫词，无实义。\", \"start_s\": 0.36, \"end_s\": 0.56}, {\"quote\": \"呃\", \"type\": \"filler\", \"reason\": \"句中停顿处的语气垫词，无实义。\", \"start_s\": 4.16, \"end_s\": 4.48}], \"issues\": [{\"dimension\": \"口头禅与语气垫词\", \"evidence\": \"在句子开头和中间使用了两次“呃”作为停顿。\", \"suggestion\": \"建议在表达时尽量减少不必要的语气垫词，保持语流的连贯性。\"}], \"uncertainty\": \"\"}",
+  "parsed": {
+    "has_speech": true,
+    "transcript": "呃，我的建议是先保留原来的方案，呃，等测试结果出来以后再调整。",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 2,
+      "然后": 0,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [
+      {
+        "quote": "呃",
+        "type": "filler",
+        "reason": "句首语气垫词，无实义。",
+        "start_s": 0.36,
+        "end_s": 0.56
+      },
+      {
+        "quote": "呃",
+        "type": "filler",
+        "reason": "句中停顿处的语气垫词，无实义。",
+        "start_s": 4.16,
+        "end_s": 4.48
+      }
+    ],
+    "issues": [
+      {
+        "dimension": "口头禅与语气垫词",
+        "evidence": "在句子开头和中间使用了两次“呃”作为停顿。",
+        "suggestion": "建议在表达时尽量减少不必要的语气垫词，保持语流的连贯性。"
+      }
+    ],
+    "uncertainty": ""
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 347,
+    "total_tokens": 584,
+    "completion_tokens": 237,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 51,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 237
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-1ed30a83-760a-9814-b5b4-947ccae28ffb",
+  "elapsed_s": 4.26
+}

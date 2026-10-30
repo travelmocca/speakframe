@@ -1,0 +1,10 @@
+{
+  "requested_model": "qwen3.8-omni-flash",
+  "prompt": "请直接听音频，测试中文口语表达分析能力。只输出一个JSON对象，不要Markdown。\n不要润色转写；尽可能保留嗯、啊、呃、重复、未完成起句和改口。听不清写[听不清]，不要补全。\n逐项区分冗余垫词、正常连接或指代、重复起句、自我修正；正常的然后、就是、这个、那个不应机械判为问题。\n请统计下列词在原音中实际出现的次数：嗯、啊、呃、然后、就是、这个、那个。计数包括正常用法；未听到为0，不确定为null。按完整词匹配，不要把那个算进这个。不要把静音或噪声当成词。\n时间位置只在可靠时给出，不确定填null；不要估造精确时间。无可辨识语音时明确说明，不生成转写和观点。\n输出字段：has_speech布尔值；transcript字符串；counts对象（上述7个词到整数或null）；observations数组（每项含quote原话、type为filler/repetition/repair/normal、reason、start_s与end_s为数字或null）；issues数组（每项含dimension为抓重点/排顺序/展开内容/衔接与恢复/口头禅与语气垫词、evidence、suggestion）；uncertainty字符串。没有问题时issues可为空。",
+  "stream": true,
+  "enable_thinking": false,
+  "max_tokens": 4096,
+  "input": "audio only; no reference text or sample title",
+  "reference_limitation": "synthetic script reference; not human verified",
+  "concurrency": 2
+}

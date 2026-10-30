@@ -1,0 +1,40 @@
+{
+  "sample_id": "24",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:05:46.036720+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": false, \"transcript\": \"\", \"counts\": {\"嗯\": 0, \"啊\": 0, \"呃\": 0, \"然后\": 0, \"就是\": 0, \"这个\": 0, \"那个\": 0}, \"observations\": [], \"issues\": [], \"uncertainty\": \"音频中无有效语音，仅有持续的静电噪音。\"}",
+  "parsed": {
+    "has_speech": false,
+    "transcript": "",
+    "counts": {
+      "嗯": 0,
+      "啊": 0,
+      "呃": 0,
+      "然后": 0,
+      "就是": 0,
+      "这个": 0,
+      "那个": 0
+    },
+    "observations": [],
+    "issues": [],
+    "uncertainty": "音频中无有效语音，仅有持续的静电噪音。"
+  },
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 354,
+    "total_tokens": 437,
+    "completion_tokens": 83,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 58,
+      "text_tokens": 296
+    },
+    "completion_tokens_details": {
+      "text_tokens": 83
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-678cdc0c-f6ef-9a23-9238-a3ef18df196f",
+  "elapsed_s": 4.74
+}

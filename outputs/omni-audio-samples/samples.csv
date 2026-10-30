@@ -1,0 +1,25 @@
+﻿id,title,audio_file,duration_s,reference_text,expected_checks,reference_status
+01,干净表达对照,audio/01.wav,9.596,我建议把上线时间推迟两天。 因为支付接口还没有完成测试。 今天先修复问题，明天再做回归测试。,无刻意植入的垫词；不得为了凑问题而报告口头禅。,script_reference_not_human_audio_verified
+02,同内容加入嗯,audio/02.wav,10.902,嗯 我建议把上线时间推迟两天。 嗯 因为支付接口还没有完成测试。 嗯 今天先修复问题，明天再做回归测试。,与01配对；脚本植入3次嗯，检查是否遗漏或合并。,script_reference_not_human_audio_verified
+03,啊与混合垫词,audio/03.wav,7.147,啊 我觉得这次会议需要缩短。 啊 嗯 可以提前发材料，会上只讨论分歧。,识别2次啊、1次嗯；不要把明确建议评价为没有观点。,script_reference_not_human_audio_verified
+04,呃与较长思考间隔,audio/04.wav,7.8,呃 我的建议是先保留原来的方案。 呃 等测试结果出来以后再调整。,脚本有2次呃；同时存在静音，不得将静音计作额外垫词。,script_reference_not_human_audio_verified
+05,然后的机械重复,audio/05.wav,7.257,然后 然后 我想说的是先检查数据。 然后 然后 我们再决定要不要重跑。,4次然后；识别重复连接成分，给出具体位置。,script_reference_not_human_audio_verified
+06,就是的机械重复,audio/06.wav,7.675,就是 这个项目 就是 需要明确一个负责人。 就是 避免每个人都以为别人在处理。,3次就是为刻意植入的赘余成分；不要只评价逻辑。,script_reference_not_human_audio_verified
+07,这个作为垫词,audio/07.wav,6.271,这个 我建议明天再讨论。 这个 今天还缺少关键数据。,2次这个用作犹豫成分；与16中的指示词用法区别。,script_reference_not_human_audio_verified
+08,那个作为垫词,audio/08.wav,7.258,那个 我想补充一个风险。 那个 如果供应商晚交付，我们就没有测试时间了。,2次那个用作犹豫成分；与16配对。,script_reference_not_human_audio_verified
+09,单字重复起句,audio/09.wav,4.573,我 我 我觉得应该先确认需求。 再开始画页面。,保留我、我、我觉得的重复起句；这是合成重复，不代表临床口吃。,script_reference_not_human_audio_verified
+10,短语原样重复,audio/10.wav,7.03,我的意思是 我的意思是 我们先确认预算。 先确认预算 再决定买哪套设备。,识别短语重复，不将其自动顺滑成一遍。,script_reference_not_human_audio_verified
+11,数字改口与自我修正,audio/11.wav,6.141,我们周三上线。 不对，是周五上线。 还有两天可以完成测试。,识别周三改为周五，最终安排为周五；不要把自我修正当垫词。,script_reference_not_human_audio_verified
+12,未完成起句后重启,audio/12.wav,6.904,我想先把这个需 我重新说一下。 先确认需求，再安排开发。,保留未完成起句；属于人为拼接模拟，不能证明自然截断音节识别能力。,script_reference_not_human_audio_verified
+13,长停顿但无垫词,audio/13.wav,7.852,我建议保留两个方案。 等成本测算完成以后，再做选择。,有额外2.5秒静音，无刻意植入垫词；暂停本身不能判为问题。,script_reference_not_human_audio_verified
+14,然后的正常连接用法,audio/14.wav,7.071,先登录系统，然后打开练习页面。 录完以后先回听，然后查看分析结果。,2次然后表达正常步骤关系，不应机械报告为口头禅。,script_reference_not_human_audio_verified
+15,就是的正常强调用法,audio/15.wav,7.233,我们现在最需要解决的，就是录音上传失败的问题。 责任人就是今天值班的工程师。,2次就是有实际语义，不应仅按词表误报。,script_reference_not_human_audio_verified
+16,这个那个的正常指代,audio/16.wav,6.537,这个方案成本低，那个方案上线快。 我倾向于这个方案，因为预算有限。,这个2次、那个1次均为指代；不应判为3个垫词。,script_reference_not_human_audio_verified
+17,混合垫词基准,audio/17.wav,10.577,嗯 我建议 就是 先做小范围试用。 然后 然后 收集三位用户的反馈。 这个 再决定是否正式上线。,检查嗯1次、就是1次、然后连续2次、这个1次及额外静音；与19至22比较。,script_reference_not_human_audio_verified
+18,逻辑薄弱但无垫词,audio/18.wav,6.879,我认为应该立即上线。 因为办公室的椅子换了颜色。 所以上线风险肯定很低。,观点理由缺乏相关性；无刻意垫词，不应混淆内容问题与声音问题。,script_reference_not_human_audio_verified
+19,混合垫词慢速,audio/19.wav,13.409,嗯 我建议 就是 先做小范围试用。 然后 然后 收集三位用户的反馈。 这个 再决定是否正式上线。,与17内容相同，仅合成速率改变；观察漏报变化。,script_reference_not_human_audio_verified
+20,混合垫词快速,audio/20.wav,7.117,嗯 我建议 就是 先做小范围试用。 然后 然后 收集三位用户的反馈。 这个 再决定是否正式上线。,与17内容相同，仅合成速率改变；观察漏报变化。,script_reference_not_human_audio_verified
+21,仅垫词降低音量,audio/21.wav,10.577,嗯 我建议 就是 先做小范围试用。 然后 然后 收集三位用户的反馈。 这个 再决定是否正式上线。,仅filler片段降低约18dB；主体音量不变，检查轻声垫词漏报。,script_reference_not_human_audio_verified
+22,混合垫词加底噪,audio/22.wav,10.577,嗯 我建议 就是 先做小范围试用。 然后 然后 收集三位用户的反馈。 这个 再决定是否正式上线。,与17同一合成源，加入确定性白噪声，目标全片SNR为20dB；不是实际办公室录音。,script_reference_not_human_audio_verified
+23,纯静音阴性对照,audio/23.wav,8.0,,无语音；不得编造转写、垫词、观点或人物情绪。,script_reference_not_human_audio_verified
+24,纯噪声阴性对照,audio/24.wav,8.0,,仅合成白噪声，无语音；不得幻觉出嗯啊或句子。,script_reference_not_human_audio_verified

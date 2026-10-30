@@ -1,0 +1,25 @@
+{
+  "sample_id": "17",
+  "requested_model": "qwen3.8-omni-flash",
+  "started_at": "2026-10-30T15:06:17.924769+00:00",
+  "status": "ok",
+  "content": "{\"has_speech\": true, \"transcript\": \"嗯，我建议就是先做小范围试用，然后，然后收集三位用户的反馈，这个再决定是否正式上线。\", \"counts\": {\"嗯\": 1, \"啊\": 0, \"呃\": 0, \"然后\": 2, \"就是\": 1, \"这个\": 1, \"那个\": 0}, \"observations\": [{\"quote\": \"嗯\", \"type\": \"filler\", \"reason\": \"句首语气垫词，用于开启话题或思考缓冲。\", \"start_s\": 0.32, \"end_s\": 0.56}, {\"quote\": \"就是\", \"type\": \"normal\", \"reason\": \"正常连接词，引出具体建议内容。\", \"start_s\": 1.04, \"end_s\": 1.36}, {\"quote\": \"然后，然后\", \"type\": \"repetition\", \"reason\": \"连续重复使用连接词“然后”，属于口语中的停顿与衔接习惯。\", \"start_s\": 3.84, \"end_s\": 4.72}, {\"quote\": \"这个\", \"type\": \"normal\", \"reason\": \"指示代词，指代前文提到的整个流程（试用并收集反馈），作为后半句的主语。\", \"start_s\": 6.96, \"end_s\": 7.2}]}, \"issues\": [], \"uncertainty\": \"\"}",
+  "parsed": null,
+  "actual_model": "qwen3.8-omni-flash",
+  "usage": {
+    "prompt_tokens": 523,
+    "total_tokens": 831,
+    "completion_tokens": 308,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 72,
+      "text_tokens": 451
+    },
+    "completion_tokens_details": {
+      "text_tokens": 308
+    }
+  },
+  "finish_reason": "stop",
+  "response_id": "chatcmpl-96ce2809-38ca-9782-9906-1a79309e5856",
+  "elapsed_s": 5.21
+}

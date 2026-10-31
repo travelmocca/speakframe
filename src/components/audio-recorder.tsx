@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { durationLabel } from '@/lib/client';
 import { Mic } from './app-shell';
+import { RecordingWave } from './recording-wave';
 import { readDraft, keepDraft, discardDraft, beginDraft } from '@/lib/recording-drafts';
 
 export function AudioRecorder({ onSave, onDirty, draftId, draftContext, disabled = false }: { onSave: (blob: Blob) => Promise<void>; onDirty: (dirty: boolean) => void; draftId: string; draftContext: { title: string; sourceId?: string; issueId?: string }; disabled?: boolean }) {
@@ -34,7 +35,7 @@ export function AudioRecorder({ onSave, onDirty, draftId, draftContext, disabled
     } catch (e) { stream.current?.getTracks().forEach(t => t.stop()); setError((e as Error).name === 'NotAllowedError' ? '麦克风权限未开启，请在浏览器地址栏允许麦克风后重试' : (e as Error).name === 'NotFoundError' ? '没有找到麦克风，请连接设备后重试' : (e as Error).message); }
     finally { setAsking(false); }
   }
-  return <section className="recorder" aria-label="录音区域"><div className="record-stage"><span className="record-timer">{durationLabel(seconds)}</span><button className={`record-control ${recording ? 'is-recording' : ''}`} aria-label={recording ? '结束录音' : '开始录音'} disabled={asking || saving || disabled} onClick={() => recording ? recorder.current?.stop() : void start()}>{recording ? <span className="stop-symbol" /> : <Mic size={30} />}</button><p className="record-caption">{recording ? '正在录音' : asking ? '正在请求麦克风权限…' : blob ? '先听一遍，再交给AI分析' : '准备好了，就说一遍'}</p></div>
+  return <section className="recorder" aria-label="录音区域"><div className="record-stage"><span className="record-timer">{durationLabel(seconds)}</span><button className={`record-control ${recording ? 'is-recording' : ''}`} aria-label={recording ? '结束录音' : '开始录音'} disabled={asking || saving || disabled} onClick={() => recording ? recorder.current?.stop() : void start()}>{recording ? <span className="stop-symbol" /> : <Mic size={30} />}</button>{recording && <RecordingWave stream={stream.current} />}<p className="record-caption">{recording ? '正在录音' : asking ? '正在请求麦克风权限…' : blob ? '先听一遍，再交给AI分析' : '准备好了，就说一遍'}</p></div>
     {url && <audio aria-label="待保存的录音" controls src={url} preload="metadata" />}
     {error && <p role="alert" className="error-message">{error}</p>}
     {blob && <div className="button-row"><button className="button quiet" disabled={saving || disabled} onClick={start}>重新录制</button><button className="button primary" disabled={saving || disabled} aria-busy={saving} onClick={async () => { setSaving(true); setError(''); try { await onSave(blob); discardDraft(draftId); setBlob(null); setSeconds(0); } catch (e) { setError((e as Error).message); } finally { setSaving(false); } }}>{saving ? '正在保存…' : '保存并分析'}</button></div>}

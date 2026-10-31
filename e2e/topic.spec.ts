@@ -27,8 +27,14 @@ test('dictates a topic with real Omni, persists it, and does not require a separ
   await expect(page.getByLabel('表达主题', { exact: true })).toHaveValue('');
   await expect(page.getByRole('button', { name: '开始录音', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: '语音输入主题', exact: true }).click();
+  const liveWave = page.getByRole('img', { name: '实时录音音量' });
+  await expect(liveWave).toBeVisible();
+  const initialBars = await liveWave.locator('i').evaluateAll(bars => bars.map(b => (b as HTMLElement).style.transform));
+  await expect.poll(() => liveWave.locator('i').evaluateAll(bars => bars.map(b => (b as HTMLElement).style.transform))).not.toEqual(initialBars);
+  await page.screenshot({ path: 'outputs/uat/recording-wave.png', fullPage: true });
   await page.waitForTimeout(8000);
   await page.getByRole('button', { name: '结束并转文字', exact: true }).click();
+  await expect(liveWave).toHaveCount(0);
   const wave = page.getByRole('group', { name: '主题语音输入' }).locator('.processing-wave');
   await expect(wave).toBeVisible();
   expect(await wave.locator('i').first().evaluate(el => getComputedStyle(el).animationName)).toBe('processing-wave');

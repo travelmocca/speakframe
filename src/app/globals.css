@@ -185,3 +185,7 @@ dialog p { margin-top: var(--space-md); line-height: 1.8; }
 .processing-wave i:nth-child(5) { animation-delay: -90ms; }
 @keyframes processing-wave { from { transform: scaleY(0.25); } to { transform: scaleY(1); } }
 @media (prefers-reduced-motion: reduce) { .processing-wave i { animation: none; transform: scaleY(0.6); } }
+
+.recording-wave { display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 32px; flex-shrink: 0; color: var(--color-accent); }
+.recording-wave i { display: block; width: 4px; height: 28px; background: currentColor; border-radius: var(--radius-input); transform: scaleY(0.15); }
+.recording-status { display: flex; align-items: center; gap: var(--space-sm); }

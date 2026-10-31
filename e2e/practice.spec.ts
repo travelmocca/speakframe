@@ -32,9 +32,14 @@ test('real browser recording, real Omni analysis, retry, comparison, persistence
   await expect(page.getByText('这次想讲清楚什么', { exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: '开始录音', exact: true }).click();
   await expect(page.getByText('正在录音', { exact: true })).toBeVisible();
+  const liveWave = page.getByRole('img', { name: '实时录音音量' });
+  await expect(liveWave).toBeVisible();
+  const initialBars = await liveWave.locator('i').evaluateAll(bars => bars.map(b => (b as HTMLElement).style.transform));
+  await expect.poll(() => liveWave.locator('i').evaluateAll(bars => bars.map(b => (b as HTMLElement).style.transform))).not.toEqual(initialBars);
   // This wait records actual MediaRecorder audio; it is not a readiness delay.
   await page.waitForTimeout(8200);
   await page.getByRole('button', { name: '结束录音', exact: true }).click();
+  await expect(page.getByRole('img', { name: '实时录音音量' })).toHaveCount(0);
   await expect(page.locator('audio')).toHaveCount(1);
   await page.getByRole('button', { name: '保存并分析', exact: true }).click();
   await expect(page.locator('.analysis-wait .processing-wave')).toBeVisible();

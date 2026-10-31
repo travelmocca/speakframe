@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { api } from '@/lib/client';
 import { Mic } from './app-shell';
+import { RecordingWave } from './recording-wave';
 import { ProcessingIndicator } from './processing-indicator';
 
 export function TopicVoiceInput({ practiceId, disabled, onResult, onBusyChange }: { practiceId: string; disabled: boolean; onResult: (title: string) => Promise<void>; onBusyChange: (busy: boolean) => void }) {
@@ -50,5 +51,5 @@ export function TopicVoiceInput({ practiceId, disabled, onResult, onBusyChange }
   function cancel() { run.current++; if (timeout.current) clearTimeout(timeout.current); if (recorder.current?.state === 'recording') recorder.current.stop(); stream.current?.getTracks().forEach(t => t.stop()); setPhase('idle'); }
   return <div className="topic-voice" role="group" aria-label="主题语音输入"><div className="topic-controls">
     {phase === 'recording' ? <><button type="button" className="button quiet" onClick={() => recorder.current?.stop()}>结束并转文字</button><button type="button" className="text-button" onClick={cancel}>取消语音输入</button></> : <button type="button" className="button quiet" disabled={disabled || phase !== 'idle'} onClick={start}>{phase === 'transcribing' ? <ProcessingIndicator>正在转文字…</ProcessingIndicator> : <><Mic size={18} />{phase === 'asking' ? '正在请求麦克风…' : '语音输入主题'}</>}</button>}
-  </div>{phase === 'recording' && <p className="small muted" role="status">正在录主题，最长30秒。</p>}{error && <p className="small error-message" role="alert">{error}</p>}</div>;
+  </div>{phase === 'recording' && <p className="small muted recording-status" role="status"><RecordingWave stream={stream.current} /><span>正在录主题，最长30秒。</span></p>}{error && <p className="small error-message" role="alert">{error}</p>}</div>;
 }

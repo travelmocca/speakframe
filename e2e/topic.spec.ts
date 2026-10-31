@@ -29,8 +29,12 @@ test('dictates a topic with real Omni, persists it, and does not require a separ
   await page.getByRole('button', { name: '语音输入主题', exact: true }).click();
   await page.waitForTimeout(8000);
   await page.getByRole('button', { name: '结束并转文字', exact: true }).click();
+  const wave = page.getByRole('group', { name: '主题语音输入' }).locator('.processing-wave');
+  await expect(wave).toBeVisible();
+  expect(await wave.locator('i').first().evaluate(el => getComputedStyle(el).animationName)).toBe('processing-wave');
   await expect(page.getByLabel('表达主题', { exact: true })).toHaveValue(/数据/, { timeout: 180000 });
   await expect(page.getByRole('button', { name: '语音输入主题', exact: true })).toBeEnabled({ timeout: 15000 });
+  await expect(wave).toHaveCount(0);
   const title = await page.getByLabel('表达主题', { exact: true }).inputValue();
   const url = page.url(), id = new URL(url).pathname.split('/').at(-1);
   await page.reload();

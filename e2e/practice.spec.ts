@@ -37,6 +37,7 @@ test('real browser recording, real Omni analysis, retry, comparison, persistence
   await page.getByRole('button', { name: '结束录音', exact: true }).click();
   await expect(page.locator('audio')).toHaveCount(1);
   await page.getByRole('button', { name: '保存并分析', exact: true }).click();
+  await expect(page.locator('.analysis-wait .processing-wave')).toBeVisible();
   await expect(page.getByTestId('transcript')).toBeVisible({ timeout: 180_000 });
   await expect(page.getByTestId('transcript')).not.toBeEmpty();
   await expect(page.getByRole('button', { name: '针对这个问题重练' }).first()).toBeVisible();

@@ -24,7 +24,7 @@ test('workspace history, issue dimensions, source retry, responsive layout and d
     const dimensions = ['抓重点', '排顺序', '展开内容', '衔接与恢复', '口头禅与语气垫词'].map(name => ({ name, finding: '测试观察' }));
     const themes = ['测试样本：向同事说明项目调整的原因', '测试样本：先检查数据，再决定是否重跑', '测试样本：准备明天的客户沟通'];
     for (let index = 0; index < themes.length; index++) {
-      const { practice } = await (await page.request.post('/api/practices', { headers })).json(); ids.push(practice.id);
+      const { practice } = await (await page.request.post('/api/practices', { headers, data: { scenario: 'opinion' } })).json(); ids.push(practice.id);
       await page.request.patch(`/api/practices/${practice.id}`, { headers, data: { title: themes[index] } });
       if (index === 2) continue;
       const upload = await page.request.post(`/api/practices/${practice.id}/attempts`, { headers, multipart: { audio: { name: 'sample.wav', mimeType: 'audio/wav', buffer: readFileSync('outputs/omni-audio-samples/audio/05.wav') } } });

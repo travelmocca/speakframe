@@ -1,3 +1,4 @@
+import { chooseScenario } from './helpers';
 import { expect, test } from '@playwright/test';
 
 test('dictates a topic with real Omni, persists it, and does not require a separate goal', async ({ page }) => {
@@ -8,6 +9,7 @@ test('dictates a topic with real Omni, persists it, and does not require a separ
   await page.getByLabel('确认密码', { exact: true }).fill('Topic-test-password');
   await page.getByRole('button', { name: '创建账号' }).click();
   await page.getByRole('button', { name: '新建练习', exact: true }).click();
+  await chooseScenario(page);
   await expect(page.getByLabel('表达主题', { exact: true })).toBeVisible();
   await expect(page.getByText('这次想讲清楚什么', { exact: true })).toHaveCount(0);
   await page.evaluate(() => {

@@ -12,7 +12,7 @@ test('API ownership, real audio validation, duplicate account, login, range and 
   expect((await a.post('/api/auth/register', { data: { phone: phoneA, password } })).status()).toBe(409);
   const cookie = (await a.storageState()).cookies.find(c => c.name === 'expression_session');
   expect(cookie?.httpOnly).toBe(true);
-  const { practice } = await (await a.post('/api/practices')).json();
+  const { practice } = await (await a.post('/api/practices', { data: { scenario: 'opinion' } })).json();
   const url = `/api/practices/${practice.id}`;
   const privateWorkspace = await (await b.get('/api/workspace')).json();
   expect(privateWorkspace.practices).toEqual([]); expect(privateWorkspace.issues).toEqual([]);

@@ -8,6 +8,7 @@ import { AppError, type Attempt } from '@/lib/store';
 import { saveAudio, modelAudio } from '@/lib/storage';
 import { qwen } from '@/lib/qwen';
 import { TOPIC_PROMPT, parseTopic } from '@/lib/topic';
+import { getScenario } from '@/lib/scenarios';
 import { verifyOrigin } from '@/lib/http-security';
 
 export const runtime = 'nodejs';
@@ -47,7 +48,7 @@ async function route(req: NextRequest, { params }: { params: Promise<{ path: str
     if (path[0] === 'me' && method === 'GET') return json({ user, model: MODEL, configured: Boolean(process.env.DASHSCOPE_API_KEY && process.env.DASHSCOPE_BASE_URL) });
     if (path[0] === 'practices' && path.length === 1) {
       if (method === 'GET') return json({ practices: db.listPractices(user.id) });
-      if (method === 'POST') { db.limit(`create:${user.id}`, 60); return json({ practice: db.createPractice(user.id) }, 201); }
+      if (method === 'POST') { const input = z.object({ scenario: z.string().refine(value => Boolean(getScenario(value))) }).safeParse(await body(req)); if (!input.success) throw new AppError('请先选择六种表达场景之一'); db.limit(`create:${user.id}`, 60); return json({ practice: db.createPractice(user.id, input.data.scenario) }, 201); }
     }
     if (path[0] === 'practices' && path.length === 2) {
       const id = path[1];

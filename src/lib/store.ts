@@ -3,6 +3,7 @@ import { createHash, randomBytes, randomUUID, scryptSync, timingSafeEqual } from
 import { chmodSync, mkdirSync, rmSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import type { Analysis, Issue, ComparisonResult } from './analysis-schema';
+import { getScenario } from './scenarios';
 
 export class AppError extends Error {
   constructor(message: string, public status = 400) { super(message); }
@@ -16,7 +17,7 @@ export type Attempt = {
 };
 export type Comparison = { id: string; practiceId: string; attemptId: string; sourceId: string; target: Issue; status: string; result: ComparisonResult | null; error: string; createdAt: number };
 export type Job = { id: string; kind: 'analysis' | 'comparison'; targetId: string; practiceId: string; state: string; leaseUntil: number };
-type PracticeRow = { id: string; userId: string; title: string; goal: string; status: string; createdAt: number; updatedAt: number };
+type PracticeRow = { id: string; userId: string; title: string; goal: string; scenario: string; status: string; createdAt: number; updatedAt: number };
 type AttemptRow = Omit<Attempt, 'analysis' | 'target'> & { analysis: string | null; target: string | null };
 type ComparisonRow = Omit<Comparison, 'result' | 'target'> & { result: string | null; target: string };
 const hash = (s: string) => createHash('sha256').update(s).digest('hex');
@@ -45,6 +46,8 @@ export class Store {
       CREATE INDEX IF NOT EXISTS job_queue ON jobs(state,createdAt);
       CREATE TABLE IF NOT EXISTS rate_limits (key TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL);
     `);
+    const columns = this.db.prepare('PRAGMA table_info(practices)').all() as { name: string }[];
+    if (!columns.some(c => c.name === 'scenario')) this.db.exec("ALTER TABLE practices ADD COLUMN scenario TEXT NOT NULL DEFAULT ''");
   }
   close() { this.db.close(); }
   register(phone: string, password: string): User {
@@ -79,9 +82,10 @@ export class Store {
       this.db.prepare('INSERT INTO rate_limits VALUES (?,1,?) ON CONFLICT(key) DO UPDATE SET count=count+1').run(key, now + 900_000);
     })();
   }
-  createPractice(userId: string) {
+  createPractice(userId: string, scenario = '') {
+    if (scenario && !getScenario(scenario)) throw new AppError('请选择有效的表达场景');
     const id = randomUUID(), now = Date.now();
-    this.db.prepare('INSERT INTO practices (id,userId,createdAt,updatedAt) VALUES (?,?,?,?)').run(id, userId, now, now); return this.practice(userId, id);
+    this.db.prepare('INSERT INTO practices (id,userId,scenario,createdAt,updatedAt) VALUES (?,?,?,?,?)').run(id, userId, scenario, now, now); return this.practice(userId, id);
   }
   owned(userId: string, id: string): PracticeRow {
     const p = this.db.prepare("SELECT * FROM practices WHERE id=? AND userId=? AND status='active'").get(id, userId) as PracticeRow | undefined;

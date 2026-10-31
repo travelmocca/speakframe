@@ -98,11 +98,12 @@ export class Store {
       (SELECT status FROM attempts WHERE practiceId=p.id ORDER BY sequence DESC LIMIT 1) latestStatus
       FROM practices p WHERE userId=? AND status='active' ORDER BY updatedAt DESC`).all(userId);
   }
-  updatePractice(userId: string, id: string, title: string, goal: string) {
-    this.owned(userId, id);
-    if (title.length > 120 || goal.length > 2000) throw new AppError('主题最多120字，表达目标最多2000字');
+  updatePractice(userId: string, id: string, title: string, goal?: string) {
+    const previous = this.owned(userId, id);
+    const retainedGoal = goal ?? previous.goal;
+    if (title.length > 120 || retainedGoal.length > 2000) throw new AppError('主题最多120字');
     if (this.db.prepare('SELECT id FROM attempts WHERE practiceId=? LIMIT 1').get(id)) throw new AppError('已有表达记录，请保留原练习目标；新内容请新建练习');
-    this.db.prepare('UPDATE practices SET title=?,goal=?,updatedAt=? WHERE id=?').run(title.trim(), goal.trim(), Date.now(), id);
+    this.db.prepare('UPDATE practices SET title=?,goal=?,updatedAt=? WHERE id=?').run(title.trim(), retainedGoal.trim(), Date.now(), id);
   }
   attempt(userId: string, id: string): Attempt {
     const row = this.db.prepare('SELECT * FROM attempts WHERE id=?').get(id) as AttemptRow | undefined;
@@ -127,7 +128,7 @@ export class Store {
   requestAnalysis(userId: string, id: string): Job {
     return this.db.transaction(() => {
       const a = this.attempt(userId, id); const p = this.owned(userId, a.practiceId);
-      if (!p.title.trim() || !p.goal.trim()) throw new AppError('请先填写表达主题和目标');
+      if (!p.title.trim()) throw new AppError('请先填写表达主题');
       const old = this.db.prepare("SELECT * FROM jobs WHERE targetId=? AND kind='analysis' AND state IN ('queued','running','done') ORDER BY createdAt DESC LIMIT 1").get(id) as Job | undefined;
       if (old) return old;
       const job = this.newJob('analysis', id, a.practiceId);

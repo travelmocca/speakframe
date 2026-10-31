@@ -41,6 +41,13 @@ describe('account and ownership', () => {
 });
 
 describe('persistent analysis jobs', () => {
+  it('allows a title-only practice to save audio and request analysis without a separate goal', () => {
+    const { db, a } = setup(); const p = db.createPractice(a.id);
+    db.updatePractice(a.id, p.id, '为什么要先检查数据');
+    const at = db.addAttempt(a.id, p.id, { filename: 'title-only.wav', mime: 'audio/wav', duration: 2 });
+    expect(db.practice(a.id, p.id).title).toBe('为什么要先检查数据');
+    expect(db.requestAnalysis(a.id, at.id).state).toBe('queued');
+  });
   it('reuses queued work and prevents deleted work from writing back', () => {
     const { db, a, dir } = setup(); const p = db.createPractice(a.id);
     db.updatePractice(a.id, p.id, '上线计划', '讲清楚建议');

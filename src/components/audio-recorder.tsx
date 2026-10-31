@@ -4,12 +4,12 @@ import { durationLabel } from '@/lib/client';
 import { Mic } from './app-shell';
 import { readDraft, keepDraft, discardDraft, beginDraft } from '@/lib/recording-drafts';
 
-export function AudioRecorder({ onSave, onDirty, draftId, draftContext, disabled = false }: { onSave: (blob: Blob) => Promise<void>; onDirty: (dirty: boolean) => void; draftId: string; draftContext: { title: string; goal: string; sourceId?: string; issueId?: string }; disabled?: boolean }) {
+export function AudioRecorder({ onSave, onDirty, draftId, draftContext, disabled = false }: { onSave: (blob: Blob) => Promise<void>; onDirty: (dirty: boolean) => void; draftId: string; draftContext: { title: string; sourceId?: string; issueId?: string }; disabled?: boolean }) {
   const [recording, setRecording] = useState(false), [asking, setAsking] = useState(false), [seconds, setSeconds] = useState(0), [blob, setBlob] = useState<Blob | null>(null), [url, setUrl] = useState(''), [saving, setSaving] = useState(false), [error, setError] = useState('');
   const recorder = useRef<MediaRecorder | null>(null), stream = useRef<MediaStream | null>(null), started = useRef(0), mounted = useRef(true);
   useEffect(() => { const draft = readDraft(draftId); if (draft) { setBlob(draft.blob); setSeconds(draft.seconds); } }, [draftId]);
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; if (recorder.current?.state === 'recording') recorder.current.stop(); stream.current?.getTracks().forEach(t => t.stop()); }; }, []);
-  useEffect(() => { onDirty(recording || !!blob); return () => onDirty(false); }, [recording, blob, onDirty]);
+  useEffect(() => { onDirty(asking || recording || saving || !!blob); return () => onDirty(false); }, [asking, recording, saving, blob, onDirty]);
   useEffect(() => { if (!blob) { setUrl(''); return; } const u = URL.createObjectURL(blob); setUrl(u); return () => URL.revokeObjectURL(u); }, [blob]);
   useEffect(() => {
     if (!recording) return;

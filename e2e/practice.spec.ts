@@ -29,7 +29,7 @@ test('real browser recording, real Omni analysis, retry, comparison, persistence
   await expect(page).toHaveURL(/\/practices\/.+/);
   const practiceUrl = page.url();
   await page.getByLabel('表达主题').fill('端到端验证：先检查数据再决定重跑');
-  await page.getByLabel('这次想讲清楚什么').fill('明确说明数据检查和重跑的先后顺序，减少重复连接词。');
+  await expect(page.getByText('这次想讲清楚什么', { exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: '开始录音', exact: true }).click();
   await expect(page.getByText('正在录音', { exact: true })).toBeVisible();
   // This wait records actual MediaRecorder audio; it is not a readiness delay.

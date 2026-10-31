@@ -17,10 +17,13 @@ test('API ownership, real audio validation, duplicate account, login, range and 
   expect((await b.get(url)).status()).toBe(404);
   expect((await b.patch(url, { data: { title: 'x', goal: 'x' } })).status()).toBe(404);
   expect((await b.delete(url)).status()).toBe(404);
+  expect((await b.post(`${url}/topic-voice`)).status()).toBe(404);
+  expect((await a.post(`${url}/topic-voice`, { multipart: { other: 'missing audio' } })).status()).toBe(400);
   expect((await a.patch(url, { data: { title: '接口验收', goal: '核实录音保存和账号隔离' } })).status()).toBe(200);
   expect((await a.post(`${url}/attempts`, { multipart: { audio: { name: 'fake.wav', mimeType: 'audio/wav', buffer: Buffer.from('not an audio file') } } })).status()).toBe(400);
   const uploaded = await a.post(`${url}/attempts`, { multipart: { audio: { name: 'real.wav', mimeType: 'audio/wav', buffer: readFileSync('outputs/omni-audio-samples/audio/01.wav') } } });
   expect(uploaded.status()).toBe(201);
+  expect((await a.post(`${url}/topic-voice`)).status()).toBe(400);
   const { attempt } = await uploaded.json();
   expect(attempt.duration).toBeGreaterThan(1);
   const audioUrl = `/api/attempts/${attempt.id}/audio`;

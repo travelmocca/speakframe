@@ -5,7 +5,9 @@ import { basename, join } from 'node:path';
 import { z } from 'zod';
 import { DATA_DIR, MAX_BYTES, MODEL, store } from '@/lib/config';
 import { AppError, type Attempt } from '@/lib/store';
-import { saveAudio } from '@/lib/storage';
+import { saveAudio, modelAudio } from '@/lib/storage';
+import { qwen } from '@/lib/qwen';
+import { TOPIC_PROMPT, parseTopic } from '@/lib/topic';
 import { verifyOrigin } from '@/lib/http-security';
 
 export const runtime = 'nodejs';
@@ -52,11 +54,11 @@ async function route(req: NextRequest, { params }: { params: Promise<{ path: str
         const p = db.practice(user.id, id);
         return json({ practice: { ...p, attempts: p.attempts.map(visibleAttempt), comparisons: p.comparisons.map(c => ({ id: c.id, sourceId: c.sourceId, attemptId: c.attemptId, target: c.target, status: c.status, result: c.result, error: c.error })) } });
       }
-      if (method === 'PATCH') { const v = z.object({ title: z.string().max(120), goal: z.string().max(2000) }).parse(await body(req)); db.updatePractice(user.id, id, v.title, v.goal); return json({ ok: true }); }
+      if (method === 'PATCH') { const v = z.object({ title: z.string().max(120), goal: z.string().max(2000).optional() }).parse(await body(req)); db.updatePractice(user.id, id, v.title, v.goal); return json({ ok: true }); }
       if (method === 'DELETE') { db.deletePractice(user.id, id); return json({ ok: true }); }
     }
     if (path[0] === 'practices' && path[2] === 'attempts' && path.length === 3 && method === 'POST') {
-      const p = db.owned(user.id, path[1]); if (!p.title || !p.goal) throw new AppError('请先填写并保存表达主题和目标');
+      const p = db.owned(user.id, path[1]); if (!p.title) throw new AppError('请先填写并保存表达主题');
       const bytes = await limitedBody(req, MAX_BYTES + 1024 * 1024);
       const form = await new Response(bytes, { headers: { 'Content-Type': req.headers.get('content-type') || '' } }).formData();
       const file = form.get('audio'); if (!(file instanceof File)) throw new AppError('请选择有效录音');
@@ -66,6 +68,20 @@ async function route(req: NextRequest, { params }: { params: Promise<{ path: str
         const attempt = db.addAttempt(user.id, p.id, saved, sourceId || undefined, issueId || undefined);
         return json({ attempt: visibleAttempt(attempt) }, 201);
       } catch (e) { await rm(join(DATA_DIR, 'audio', saved.filename), { force: true }); throw e; }
+    }
+    if (path[0] === 'practices' && path[2] === 'topic-voice' && path.length === 3 && method === 'POST') {
+      const p = db.practice(user.id, path[1]);
+      if (p.attempts.length) throw new AppError('已有表达记录，主题不能再修改');
+      db.limit(`topic-voice:${user.id}`, 60);
+      const bytes = await limitedBody(req, 11 * 1024 * 1024);
+      const form = await new Response(bytes, { headers: { 'Content-Type': req.headers.get('content-type') || '' } }).formData();
+      const file = form.get('audio'); if (!(file instanceof File)) throw new AppError('请选择有效的主题语音');
+      const saved = await saveAudio(file, { temporary: true, maxSeconds: 30, maxBytes: 10 * 1024 * 1024 });
+      try {
+        const reply = await qwen(TOPIC_PROMPT, await modelAudio(saved.filename, 'tmp'));
+        db.owned(user.id, path[1]);
+        return json({ title: parseTopic(reply.content) });
+      } finally { await rm(join(DATA_DIR, 'tmp', saved.filename), { force: true }); }
     }
     if (path[0] === 'attempts' && path.length === 3) {
       const a = db.attempt(user.id, path[1]);

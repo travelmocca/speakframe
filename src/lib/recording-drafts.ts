@@ -1,5 +1,5 @@
 // Session-memory drafts survive Next's client-side history traversal; saved server recordings remain separate.
-type Draft = { blob: Blob; seconds: number; title: string; goal: string; sourceId?: string; issueId?: string };
+type Draft = { blob: Blob; seconds: number; title: string; sourceId?: string; issueId?: string };
 const drafts = new Map<string, Draft>();
 const tickets = new Map<string, number>();
 let nextTicket = 0;

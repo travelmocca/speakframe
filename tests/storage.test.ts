@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { saveAudio, modelAudio } from '../src/lib/storage';
@@ -41,3 +41,20 @@ it('supports the full ten minute limit without exceeding the provider base64 lim
     expect(audio.bytes.length).toBeGreaterThan(7_000_000);
   } finally { if (saved) rmSync(join(DATA_DIR, 'audio', saved.filename), { force: true }); rmSync(dir, { recursive: true, force: true }); }
 }, 30000);
+
+it('keeps topic audio temporary and rejects audio longer than thirty seconds without leaving files', async () => {
+  const saved = await saveAudio(new File([readFileSync('outputs/omni-audio-samples/audio/01.wav')], 'topic.wav'), { temporary: true, maxSeconds: 30 });
+  try {
+    expect(existsSync(join(DATA_DIR, 'tmp', saved.filename))).toBe(true);
+    expect(existsSync(join(DATA_DIR, 'audio', saved.filename))).toBe(false);
+    expect((await modelAudio(saved.filename, 'tmp')).bytes.length).toBeGreaterThan(1000);
+  } finally { rmSync(join(DATA_DIR, 'tmp', saved.filename), { force: true }); }
+  const dir = mkdtempSync(join(tmpdir(), 'long-topic-'));
+  try {
+    const path = join(dir, 'long.wav');
+    execFileSync('ffmpeg', ['-v', 'error', '-f', 'lavfi', '-i', 'anullsrc=r=16000:cl=mono', '-t', '31', path]);
+    const before = readdirSync(join(DATA_DIR, 'tmp')).sort();
+    await expect(saveAudio(new File([readFileSync(path)], 'long.wav'), { temporary: true, maxSeconds: 30 })).rejects.toThrow('主题语音最长30秒');
+    expect(readdirSync(join(DATA_DIR, 'tmp')).sort()).toEqual(before);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});

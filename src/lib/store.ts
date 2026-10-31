@@ -7,6 +7,7 @@ import type { Analysis, Issue, ComparisonResult } from './analysis-schema';
 export class AppError extends Error {
   constructor(message: string, public status = 400) { super(message); }
 }
+export type WorkspaceIssue = { practiceId: string; title: string; attemptId: string; sequence: number; createdAt: number; issue: Issue };
 export type User = { id: string; phone: string };
 export type Attempt = {
   id: string; practiceId: string; sequence: number; filename: string; mime: string; duration: number;
@@ -97,6 +98,13 @@ export class Store {
     return this.db.prepare(`SELECT p.*, (SELECT count(*) FROM attempts WHERE practiceId=p.id) attemptCount,
       (SELECT status FROM attempts WHERE practiceId=p.id ORDER BY sequence DESC LIMIT 1) latestStatus
       FROM practices p WHERE userId=? AND status='active' ORDER BY updatedAt DESC`).all(userId);
+  }
+  workspaceIssues(userId: string): WorkspaceIssue[] {
+    const rows = this.db.prepare(`SELECT p.id practiceId,p.title,a.id attemptId,a.sequence,a.createdAt,a.analysis
+      FROM practices p JOIN attempts a ON a.id=(SELECT id FROM attempts WHERE practiceId=p.id ORDER BY sequence DESC LIMIT 1)
+      WHERE p.userId=? AND p.status='active' AND a.status='done' AND a.analysis IS NOT NULL
+      ORDER BY a.createdAt DESC,a.id`).all(userId) as { practiceId: string; title: string; attemptId: string; sequence: number; createdAt: number; analysis: string }[];
+    return rows.flatMap(({ analysis, ...row }) => (JSON.parse(analysis) as Analysis).issues.map(issue => ({ ...row, issue })));
   }
   updatePractice(userId: string, id: string, title: string, goal?: string) {
     const previous = this.owned(userId, id);

@@ -3,11 +3,25 @@
   "initialInspection": {
     "existingApp": false,
     "existingDesignSystem": false,
-    "preserved": ["specs/", "docs/", "outputs/omni-audio-samples/", "local credential files"]
+    "preserved": [
+      "specs/",
+      "docs/",
+      "outputs/omni-audio-samples/",
+      "local credential files"
+    ]
   },
   "material": {
-    "real": ["user topic and goal", "recorded audio", "actual Omni transcript and feedback"],
-    "absent": ["testimonials", "invented scores", "progress claims", "stock photos"]
+    "real": [
+      "user topic and goal",
+      "recorded audio",
+      "actual Omni transcript and feedback"
+    ],
+    "absent": [
+      "testimonials",
+      "invented scores",
+      "progress claims",
+      "stock photos"
+    ]
   },
   "theme": {
     "name": "Dose",
@@ -19,5 +33,32 @@
     "staticAndAuthRender": "outputs/uat/hallmark-check.txt",
     "authenticatedResponsive": "outputs/uat/responsive-checks.json"
   },
-  "review": "Independent read-only code review plus in-thread screenshot review; findings fixed and regression tested"
+  "review": "Independent read-only code review plus in-thread screenshot review; findings fixed and regression tested",
+  "workspaceRedesign": {
+    "scope": "app",
+    "theme": "Dose (existing brand)",
+    "files": {
+      "edit": [
+        "src/components/practice-list.tsx",
+        "src/components/practice-workbench.tsx",
+        "src/lib/store.ts",
+        "src/app/api/[...path]/route.ts",
+        "src/app/globals.css"
+      ],
+      "delete": []
+    },
+    "preserved": [
+      "all routes and audio data",
+      "registration and recording",
+      "private account ownership",
+      "deletion confirmation",
+      "existing Dose tokens at src/app/tokens.css:1"
+    ],
+    "introduced": [
+      "current issues from latest completed attempt per practice",
+      "dimension filtering in URL",
+      "deep links to targeted retry"
+    ],
+    "material": "existing personal topics, version counts, timestamps, verified and unverified model quotes; no invented metrics"
+  }
 }

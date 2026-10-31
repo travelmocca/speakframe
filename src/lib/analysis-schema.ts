@@ -1,7 +1,8 @@
 import { createHash } from 'node:crypto';
 import { z } from 'zod';
 
-export const DIMENSIONS = ['抓重点', '排顺序', '展开内容', '衔接与恢复', '口头禅与语气垫词'] as const;
+import { DIMENSIONS } from './dimensions';
+export { DIMENSIONS } from './dimensions';
 const short = z.string().max(8000);
 const issueSchema = z.object({ dimension: z.enum(DIMENSIONS), evidence: short.min(1), impact: short.min(1), suggestion: short.min(1) });
 const analysisSchema = z.object({

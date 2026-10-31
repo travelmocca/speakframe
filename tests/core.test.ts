@@ -145,3 +145,25 @@ describe('model trust boundaries', () => {
     expect(result.verdict).toBe('无法判断');
   });
 });
+
+describe('workspace current issue snapshot', () => {
+  it('isolates accounts, replaces old issues with the latest attempt and removes deleted practices', () => {
+    const { db, a, b } = setup(); const p = db.createPractice(a.id);
+    db.updatePractice(a.id, p.id, '数据检查');
+    const first = db.addAttempt(a.id, p.id, { filename: 'first.wav', mime: 'audio/wav', duration: 2 });
+    const analysis = parseAnalysis(JSON.stringify({ transcript: '然后，然后，先检查数据。', dimensions: ['抓重点', '排顺序', '展开内容', '衔接与恢复', '口头禅与语气垫词'].map(name => ({ name, finding: '观察' })), issues: [{ dimension: '口头禅与语气垫词', evidence: '然后，然后', impact: '重复', suggestion: '保留一次' }], uncertainty: '' }));
+    let job = db.requestAnalysis(a.id, first.id); db.claimJob(); db.completeJob(job.id, analysis);
+    expect(db.workspaceIssues(b.id)).toEqual([]);
+    expect(db.workspaceIssues(a.id)).toMatchObject([{ practiceId: p.id, title: '数据检查', attemptId: first.id, issue: { evidence: '然后，然后', evidenceVerified: true } }]);
+    expect(JSON.stringify(db.workspaceIssues(a.id))).not.toContain('filename');
+    const second = db.addAttempt(a.id, p.id, { filename: 'second.wav', mime: 'audio/wav', duration: 2 });
+    expect(db.workspaceIssues(a.id)).toEqual([]);
+    job = db.requestAnalysis(a.id, second.id); db.claimJob(); db.completeJob(job.id, { ...analysis, issues: [] });
+    expect(db.workspaceIssues(a.id)).toEqual([]);
+    const third = db.addAttempt(a.id, p.id, { filename: 'third.wav', mime: 'audio/wav', duration: 2 });
+    job = db.requestAnalysis(a.id, third.id); db.claimJob(); db.completeJob(job.id, analysis);
+    expect(db.workspaceIssues(a.id)).toHaveLength(1);
+    expect(db.workspaceIssues(a.id)[0].attemptId).toBe(third.id);
+    db.deletePractice(a.id, p.id); expect(db.workspaceIssues(a.id)).toEqual([]);
+  });
+});

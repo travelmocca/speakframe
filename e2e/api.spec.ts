@@ -14,6 +14,8 @@ test('API ownership, real audio validation, duplicate account, login, range and 
   expect(cookie?.httpOnly).toBe(true);
   const { practice } = await (await a.post('/api/practices')).json();
   const url = `/api/practices/${practice.id}`;
+  const privateWorkspace = await (await b.get('/api/workspace')).json();
+  expect(privateWorkspace.practices).toEqual([]); expect(privateWorkspace.issues).toEqual([]);
   expect((await b.get(url)).status()).toBe(404);
   expect((await b.patch(url, { data: { title: 'x', goal: 'x' } })).status()).toBe(404);
   expect((await b.delete(url)).status()).toBe(404);

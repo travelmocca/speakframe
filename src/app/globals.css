@@ -1,5 +1,5 @@
 /* Hallmark · shape: app screen · genre: modern-minimal · theme: Dose (deal 3/3)
- * nav: top bar with practice history and account · signature: recorded voice beside its quoted feedback
+ * nav: top bar with practice history and account · signature: expression history beside source-linked current feedback
  * states: loading empty error full recording uploading analyzing comparing · dose: white
  * axes: light/grotesk-sans/chromatic-green · posture: committed · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H4 E3 S4 R4 V3 · weakest: E, browser focus and recording states require runtime verification */
@@ -88,7 +88,7 @@ dialog p { margin-top: var(--space-md); line-height: 1.8; }
 .topic-form { max-width: 80ch; margin-block: var(--space-md) var(--space-xl); }
 .topic-field { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-sm); align-items: start; }
 .topic-controls { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
-.topic-voice p { margin-top: var(--space-xs); max-width: 32ch; }
+.topic-voice p { margin-top: var(--space-xs); max-width: 45ch; }
 .topic-form .text-button { justify-self: start; }
 .work-toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); padding-block: var(--space-md); border-block: 1px solid var(--color-rule); margin-bottom: var(--space-xl); }
 .tab-buttons { display: inline-flex; gap: var(--space-xs); }
@@ -177,7 +177,7 @@ dialog p { margin-top: var(--space-md); line-height: 1.8; }
 
 /* A processing signal, rather than an audio-level or percentage estimate. */
 .processing-indicator { display: inline-flex; align-items: center; gap: var(--space-sm); }
-.processing-wave { display: inline-flex; align-items: center; gap: 3px; height: 22px; flex-shrink: 0; color: var(--color-accent); }
+.processing-wave { display: inline-flex; align-items: center; gap: var(--space-2xs); height: 22px; flex-shrink: 0; color: var(--color-accent); }
 .processing-wave i { display: block; width: 3px; height: 18px; background: currentColor; border-radius: var(--radius-input); transform-origin: center; animation: processing-wave 900ms ease-in-out infinite alternate; }
 .processing-wave i:nth-child(2) { animation-delay: -360ms; }
 .processing-wave i:nth-child(3) { animation-delay: -180ms; }
@@ -186,6 +186,67 @@ dialog p { margin-top: var(--space-md); line-height: 1.8; }
 @keyframes processing-wave { from { transform: scaleY(0.25); } to { transform: scaleY(1); } }
 @media (prefers-reduced-motion: reduce) { .processing-wave i { animation: none; transform: scaleY(0.6); } }
 
-.recording-wave { display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 32px; flex-shrink: 0; color: var(--color-accent); }
+.recording-wave { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2xs); height: 32px; flex-shrink: 0; color: var(--color-accent); }
 .recording-wave i { display: block; width: 4px; height: 28px; background: currentColor; border-radius: var(--radius-input); transform: scaleY(0.15); }
 .recording-status { display: flex; align-items: center; gap: var(--space-sm); }
+
+/* Personal workspace: history beside source-linked feedback, using the existing Dose system. */
+.workspace-heading { margin-bottom: var(--space-xl); }
+.workspace-heading h1 { font-size: var(--text-2xl); min-width: 0; overflow-wrap: break-word; }
+.workspace-heading > p { margin-top: var(--space-xs); max-width: 65ch; }
+.workspace-start { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); padding: var(--space-lg) var(--space-xl); margin-bottom: var(--space-xl); background: var(--color-paper-2); border-block: 1px solid var(--color-rule); }
+.workspace-start h2 { font-size: var(--text-xl); }
+.workspace-start p { color: var(--color-ink-2); margin-top: var(--space-xs); max-width: 65ch; }
+.workspace-start .button { flex-shrink: 0; }
+.workspace-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: var(--space-xl); align-items: start; }
+.workspace-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-lg); }
+.workspace-section-head h2 { font-size: var(--text-xl); }
+.workspace-history,.workspace-problems { min-width: 0; }
+.workspace-problems { padding-left: var(--space-xl); border-left: 1px solid var(--color-rule); }
+.workspace-grid .list-head,.workspace-grid .practice-row { grid-template-columns: minmax(0, 1fr) 112px 96px 44px; gap: var(--space-sm); }
+.workspace-grid .practice-title h3 { font-size: var(--text-md); font-weight: 700; line-height: 1.7; overflow-wrap: break-word; }
+.workspace-grid .row-meta { line-height: 1.7; }
+.workspace-grid .practice-row { align-items: center; }
+.workspace-scope { line-height: 1.8; max-width: 65ch; margin-bottom: var(--space-lg); }
+.dimension-summary { border-block: 1px solid var(--color-rule); }
+.dimension-filter { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: var(--space-sm); min-height: 44px; padding: var(--space-xs) var(--space-sm); font-size: var(--text-sm); border: 0; border-bottom: 1px solid var(--color-rule); background: transparent; cursor: pointer; }
+.dimension-filter:last-child { border-bottom: 0; }
+.dimension-filter:hover { background: var(--color-paper-2); }
+.dimension-filter[aria-pressed="true"] { background: var(--color-paper-3); font-weight: 700; color: var(--color-accent-deep); }
+.dimension-filter > span:last-child { font-variant-numeric: tabular-nums; }
+.workspace-pending { margin-top: var(--space-md); line-height: 1.8; }
+.workspace-issue { padding-block: var(--space-lg); border-bottom: 1px solid var(--color-rule); }
+.workspace-issue-meta { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-sm); flex-wrap: wrap; }
+.workspace-issue-meta h3 { font-size: var(--text-md); }
+.workspace-source { display: inline-block; margin-top: var(--space-xs); max-width: 100%; overflow-wrap: break-word; color: var(--color-muted); }
+.workspace-issue blockquote { font-size: var(--text-md); }
+.workspace-issue > p { max-width: 65ch; line-height: 1.8; overflow-wrap: break-word; }
+.workspace-suggestion { margin-top: var(--space-sm); }
+.workspace-issue .text-button { margin-top: var(--space-xs); padding-left: 0; color: var(--color-accent-deep); }
+.workspace-disclaimer { margin-top: var(--space-lg); max-width: 65ch; line-height: 1.8; }
+.workspace-empty { padding-block: var(--space-xl); }
+.workspace-empty h3 { font-size: var(--text-lg); }
+.workspace-empty p { max-width: 65ch; margin-top: var(--space-sm); color: var(--color-muted); line-height: 1.8; }
+.workspace-empty .button { margin-top: var(--space-lg); }
+.workspace-loading .skeleton + .skeleton { margin-top: var(--space-lg); }
+@media (max-width: 1100px) {
+  .workspace-grid { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: var(--space-lg); }
+  .workspace-problems { padding-left: var(--space-lg); }
+  .workspace-grid .list-head { display: none; }
+  .workspace-grid .practice-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .workspace-grid .practice-title { grid-column: 1 / -1; }
+  .workspace-grid .row-meta { grid-column: 1; }
+  .workspace-grid .status { grid-column: 1; }
+  .workspace-grid .practice-row > button { grid-column: 2; grid-row: 2 / 4; }
+}
+@media (max-width: 760px) {
+  .workspace-heading { margin-bottom: var(--space-lg); }
+  .workspace-start { flex-direction: column; align-items: stretch; padding: var(--space-lg); gap: var(--space-lg); }
+  .workspace-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+  .workspace-problems { padding-left: 0; padding-top: var(--space-lg); border-left: 0; border-top: 1px solid var(--color-rule); }
+}
+
+.workspace-jumps { display: flex; flex-wrap: wrap; gap: var(--space-lg); margin-bottom: var(--space-lg); border-bottom: 1px solid var(--color-rule); }
+.workspace-jumps a { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--text-sm); color: var(--color-accent-deep); }
+.retry-choice h2 { font-size: var(--text-lg); }
+.retry-choice > p { margin-top: var(--space-sm); max-width: 65ch; line-height: 1.8; }

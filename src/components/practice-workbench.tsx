@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { api, dateLabel, durationLabel, statusLabel } from '@/lib/client';
+import { api, dateLabel, durationLabel } from '@/lib/client';
 import type { Analysis, ComparisonResult, Issue } from '@/lib/analysis-schema';
 import { AppShell } from './app-shell';
 import { AudioRecorder } from './audio-recorder';
@@ -17,6 +17,7 @@ export function PracticeWorkbench({ id }: { id: string }) {
   const [practice, setPractice] = useState<Practice | null>(null), [title, setTitle] = useState(''), [selected, setSelected] = useState(''), [view, setView] = useState('expression');
   const [loading, setLoading] = useState(true), [error, setError] = useState(''), [busy, setBusy] = useState(false), [recordMode, setRecordMode] = useState(false), [target, setTarget] = useState<{ sourceId: string; issue: Issue } | null>(null), [dirty, setDirty] = useState(false);
   const [topicBusy, setTopicBusy] = useState(false);
+  const [retryChoice, setRetryChoice] = useState<{ sourceId: string; issue: Issue } | null>(null);
   const unsaved = dirty || topicBusy;
   const changeTopicBusy = useCallback((value: boolean) => setTopicBusy(value), []);
   const initialized = useRef(false);
@@ -27,11 +28,17 @@ export function PracticeWorkbench({ id }: { id: string }) {
       if (!initialized.current) {
         const params = new URLSearchParams(location.search);
         setTitle(p.title); setSelected(params.get('attempt') || p.attempts.at(-1)?.id || ''); setView(params.get('view') === 'compare' ? 'compare' : 'expression'); setRecordMode(!p.attempts.length); initialized.current = true;
+        const requestedSource = p.attempts.find(a => a.id === params.get('attempt'));
+        const requestedIssue = requestedSource?.analysis?.issues.find(i => i.id === params.get('retry'));
+        const requested = requestedSource && requestedIssue ? { sourceId: requestedSource.id, issue: requestedIssue } : null;
         const draft = readDraft(id);
         if (draft) {
           setTitle(draft.title); setRecordMode(true); setView('expression');
           const source = p.attempts.find(a => a.id === draft.sourceId), issue = source?.analysis?.issues.find(i => i.id === draft.issueId);
           if (source && issue) { setSelected(source.id); setTarget({ sourceId: source.id, issue }); }
+          if (requested && (draft.sourceId !== requested.sourceId || draft.issueId !== requested.issue.id)) setRetryChoice(requested);
+        } else if (requested) {
+          setTarget(requested); setRecordMode(true); setView('expression');
         }
       }
     } catch (e) { setError((e as Error).message); } finally { setLoading(false); }
@@ -50,8 +57,8 @@ export function PracticeWorkbench({ id }: { id: string }) {
     return () => { window.removeEventListener('beforeunload', prevent); window.removeEventListener('popstate', preventHistory, true); };
   }, [unsaved]);
   useEffect(() => {
-    if (!initialized.current) return; const params = new URLSearchParams(); if (selected) params.set('attempt', selected); if (view === 'compare') params.set('view', 'compare'); history.replaceState(null, '', `${location.pathname}${params.size ? '?' + params.toString() : ''}`);
-  }, [selected, view]);
+    if (!initialized.current) return; const params = new URLSearchParams(); if (selected) params.set('attempt', selected); if (view === 'compare') params.set('view', 'compare'); if (retryChoice) { params.set('attempt', retryChoice.sourceId); params.set('retry', retryChoice.issue.id); } else if (recordMode && target) params.set('retry', target.issue.id); history.replaceState(null, '', `${location.pathname}${params.size ? '?' + params.toString() : ''}`);
+  }, [selected, view, recordMode, target, retryChoice]);
   const current = practice?.attempts.find(a => a.id === selected) || practice?.attempts.at(-1);
   const comparison = [...(practice?.comparisons || [])].reverse().find(c => c.attemptId === current?.id);
   const source = practice?.attempts.find(a => a.id === current?.sourceId);
@@ -71,6 +78,7 @@ export function PracticeWorkbench({ id }: { id: string }) {
   return <AppShell hasUnsaved={unsaved}>{loading ? <div className="skeleton">正在打开练习…</div> : !practice ? <div className="empty-state"><h1>{error || '练习不存在或无权访问'}</h1><Link className="button quiet" href="/practices">返回练习记录</Link></div> : <>
     <div className="work-heading"><Link className="back-link" href="/practices" onClick={e => { if (unsaved && !confirm('还有未保存的录音，确定离开吗？')) e.preventDefault(); }}>返回练习记录</Link><h1>{practice.title || '开始一段新表达'}</h1><p className="muted">选一个你想说的话题，准备好了就开始录音。</p></div>
     {error && <p role="alert" className="notice error-message">{error}</p>}
+    {retryChoice && <section className="notice retry-choice" aria-labelledby="draft-choice-heading"><h2 id="draft-choice-heading">还有一段未保存的录音</h2><p>已保留上次录音。你刚选择了「{retryChoice.issue.dimension}」的重练，可以继续旧录音，或放弃草稿后切换。</p><div className="button-row"><button className="button quiet" onClick={() => setRetryChoice(null)}>继续上次录音</button><button className="button quiet" onClick={() => { if (!confirm('放弃未保存的录音，切换到刚选择的问题吗？')) return; discardDraft(id); setTarget(retryChoice); setSelected(retryChoice.sourceId); setRecordMode(true); setView('expression'); setRetryChoice(null); }}>放弃草稿，练所选问题</button></div></section>}
     {!practice.attempts.length && <section className="topic-form"><label htmlFor="topic">表达主题</label><div className="topic-field"><input id="topic" value={title} maxLength={120} onChange={e => setTitle(e.target.value)} placeholder="例如：为什么建议推迟上线" required disabled={topicBusy} /><TopicVoiceInput practiceId={id} disabled={busy || dirty} onBusyChange={changeTopicBusy} onResult={async value => { setTitle(value); await api(`/practices/${id}`, { method: 'PATCH', body: JSON.stringify({ title: value }) }); await load(); }} /></div><button className="text-button" disabled={busy || topicBusy} onClick={() => action(() => api(`/practices/${id}`, { method: 'PATCH', body: JSON.stringify({ title }) }))}>保存主题</button></section>}
     {practice.attempts.length > 0 && <div className="work-toolbar"><div className="tab-buttons" aria-label="查看方式"><button aria-pressed={view === 'expression'} onClick={() => setView('expression')}>本次表达</button><button aria-pressed={view === 'compare'} disabled={!current?.sourceId || dirty} title={dirty ? "请先保存或取消当前录音" : undefined} onClick={() => setView('compare')}>前后对比</button></div><label className="version-picker">表达版本<select aria-label="表达版本" value={current?.id || ''} onChange={e => { if (dirty && !confirm('还有未保存的录音，确定切换版本吗？')) return; setSelected(e.target.value); setRecordMode(false); setTarget(null); }} disabled={dirty}>{practice.attempts.map(a => <option key={a.id} value={a.id}>第 {a.sequence} 次表达</option>)}</select></label></div>}
     {view === 'compare' && current && source ? <section className="comparison-view"><div className="section-heading"><h2>围绕同一个问题，看两次表达</h2><p className="muted">{current.target?.dimension}：{current.target?.suggestion}</p></div><div className="compare-columns">{[source, current].map((a, index) => <section key={a.id} className="compare-version"><h3>{index === 0 ? '重练前' : '重练后'} <span className="muted small">第 {a.sequence} 次表达</span></h3><audio controls src={a.audioUrl} preload="metadata" aria-label={index === 0 ? '重练前录音' : '重练后录音'} /><p className="transcript">{a.transcript || '转写尚未完成'}</p></section>)}</div>

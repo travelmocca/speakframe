@@ -311,3 +311,13 @@ dialog p { margin-top: var(--space-md); line-height: 1.8; }
 .issue-parts > div + div { margin-top: var(--space-md); }
 .issue-parts dt { color: var(--color-muted); }
 .issue-parts blockquote { margin-block: var(--space-xs); }
+
+.issue-controls { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); padding-bottom: var(--space-sm); border-bottom: 1px solid var(--color-rule); }
+.issue-controls > div { display: flex; gap: var(--space-xs); }
+.issue-summary { min-height: 44px; padding-block: var(--space-xs); cursor: pointer; }
+.issue-summary-content { display: inline-grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: var(--space-sm); width: calc(100% - var(--space-lg)); vertical-align: top; }
+.issue-summary strong { display: block; font-size: var(--text-md); line-height: 1.6; }
+.issue-preview { display: block; margin-top: var(--space-xs); font-size: var(--text-sm); color: var(--color-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.issue[open] .issue-preview { display: none; }
+
+.issue-list > details.issue { padding-block: var(--space-sm); }

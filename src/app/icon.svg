@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="表达练习">
+  <rect width="128" height="128" rx="28" fill="#F7F4EC"/>
+  <rect x="14" y="14" width="100" height="100" rx="22" fill="none" stroke="#2F7A62" stroke-width="8"/>
+  <g fill="#2F7A62">
+    <rect x="34" y="58" width="7" height="22" rx="3.5"/>
+    <rect x="45" y="48" width="7" height="42" rx="3.5"/>
+    <rect x="56" y="40" width="7" height="58" rx="3.5"/>
+    <rect x="67" y="50" width="7" height="38" rx="3.5"/>
+  </g>
+  <path d="M78 74 C86 74 90 58 98 48 C102 43 106 40 110 38" fill="none" stroke="#2F7A62" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="42" cy="88" r="6" fill="#2F7A62"/>
+</svg>

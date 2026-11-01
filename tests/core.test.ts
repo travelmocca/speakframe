@@ -99,13 +99,13 @@ describe('persistent analysis jobs', () => {
     expect(reopened.requestAnalysis(a.id, at.id).id).toBe(job.id);
     expect(reopened.claimJob()).toBeNull();
   });
-  it('links a retry to the actual source issue and deduplicates comparisons', () => {
+  it('links a comprehensive retry to its previous round and deduplicates automatic comparisons', () => {
     const { db, a, b } = setup(); const p = db.createPractice(a.id); db.updatePractice(a.id, p.id, '重练', '减少重复');
     const first = db.addAttempt(a.id, p.id, { filename: 'first.wav', mime: 'audio/wav', duration: 2 });
     const issue = { id: 'real-issue', dimension: '衔接与恢复', evidence: '然后，然后', impact: '重复', suggestion: '保留一次', evidenceVerified: true };
     let job = db.requestAnalysis(a.id, first.id); db.claimJob(); db.completeJob(job.id, { transcript: '然后，然后，检查数据。', issues: [issue], dimensions: [], uncertainty: '' });
-    const second = db.addAttempt(a.id, p.id, { filename: 'second.wav', mime: 'audio/wav', duration: 2 }, first.id, issue.id);
-    expect(second.target?.suggestion).toBe('保留一次'); expect(second.sourceId).toBe(first.id);
+    const second = db.addAttempt(a.id, p.id, { filename: 'second.wav', mime: 'audio/wav', duration: 2 }, first.id);
+    expect(second.target).toBeNull(); expect(second.sourceId).toBe(first.id);
     expect(() => db.requestComparison(a.id, second.id)).toThrow();
     job = db.requestAnalysis(a.id, second.id); db.claimJob(); db.completeJob(job.id, { transcript: '检查数据。', issues: [], dimensions: [], uncertainty: '' });
     const c = db.requestComparison(a.id, second.id);
@@ -160,6 +160,7 @@ describe('workspace current issue snapshot', () => {
     expect(db.workspaceIssues(a.id)).toEqual([]);
     job = db.requestAnalysis(a.id, second.id); db.claimJob(); db.completeJob(job.id, { ...analysis, issues: [] });
     expect(db.workspaceIssues(a.id)).toEqual([]);
+    const autoComparison = db.claimJob()!; expect(autoComparison.kind).toBe('comparison'); db.completeJob(autoComparison.id, { verdict: '无法判断' });
     const third = db.addAttempt(a.id, p.id, { filename: 'third.wav', mime: 'audio/wav', duration: 2 });
     job = db.requestAnalysis(a.id, third.id); db.claimJob(); db.completeJob(job.id, analysis);
     expect(db.workspaceIssues(a.id)).toHaveLength(1);

@@ -15,7 +15,8 @@ export type Attempt = {
   sourceId: string | null; target: Issue | null; status: string; transcript: string;
   analysis: Analysis | null; error: string; createdAt: number;
 };
-export type Comparison = { id: string; practiceId: string; attemptId: string; sourceId: string; target: Issue; status: string; result: ComparisonResult | null; error: string; createdAt: number };
+export type Comparison = { id: string; practiceId: string; attemptId: string; sourceId: string; target: Issue | Issue[]; status: string; result: ComparisonResult | null; error: string; createdAt: number };
+export type Reflection = { id: string; practiceId: string; text: string; createdAt: number };
 export type Job = { id: string; kind: 'analysis' | 'comparison'; targetId: string; practiceId: string; state: string; leaseUntil: number };
 type PracticeRow = { id: string; userId: string; title: string; goal: string; scenario: string; status: string; createdAt: number; updatedAt: number };
 type AttemptRow = Omit<Attempt, 'analysis' | 'target'> & { analysis: string | null; target: string | null };
@@ -41,6 +42,7 @@ export class Store {
       CREATE TABLE IF NOT EXISTS practices (id TEXT PRIMARY KEY, userId TEXT NOT NULL REFERENCES users(id), title TEXT NOT NULL DEFAULT '', goal TEXT NOT NULL DEFAULT '', status TEXT NOT NULL DEFAULT 'active', createdAt INTEGER NOT NULL, updatedAt INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS attempts (id TEXT PRIMARY KEY, practiceId TEXT NOT NULL REFERENCES practices(id) ON DELETE CASCADE, sequence INTEGER NOT NULL, filename TEXT NOT NULL, mime TEXT NOT NULL, duration REAL NOT NULL, sourceId TEXT, target TEXT, status TEXT NOT NULL DEFAULT 'saved', transcript TEXT NOT NULL DEFAULT '', analysis TEXT, rawResponse TEXT, error TEXT NOT NULL DEFAULT '', createdAt INTEGER NOT NULL, UNIQUE(practiceId,sequence));
       CREATE TABLE IF NOT EXISTS comparisons (id TEXT PRIMARY KEY, practiceId TEXT NOT NULL REFERENCES practices(id) ON DELETE CASCADE, attemptId TEXT NOT NULL, sourceId TEXT NOT NULL, target TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'queued', result TEXT, rawResponse TEXT, error TEXT NOT NULL DEFAULT '', createdAt INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS reflections (id TEXT PRIMARY KEY, practiceId TEXT NOT NULL REFERENCES practices(id) ON DELETE CASCADE, text TEXT NOT NULL, createdAt INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS jobs (id TEXT PRIMARY KEY, kind TEXT NOT NULL, targetId TEXT NOT NULL, practiceId TEXT NOT NULL REFERENCES practices(id) ON DELETE CASCADE, state TEXT NOT NULL DEFAULT 'queued', leaseUntil INTEGER NOT NULL DEFAULT 0, error TEXT NOT NULL DEFAULT '', createdAt INTEGER NOT NULL);
       CREATE INDEX IF NOT EXISTS practice_owner ON practices(userId,updatedAt);
       CREATE INDEX IF NOT EXISTS job_queue ON jobs(state,createdAt);
@@ -94,13 +96,15 @@ export class Store {
   practice(userId: string, id: string) {
     const p = this.owned(userId, id);
     return { ...p,
+      reflections: this.db.prepare('SELECT * FROM reflections WHERE practiceId=? ORDER BY createdAt DESC,rowid DESC').all(id) as Reflection[],
       attempts: (this.db.prepare('SELECT * FROM attempts WHERE practiceId=? ORDER BY sequence').all(id) as AttemptRow[]).map(asAttempt),
       comparisons: (this.db.prepare('SELECT * FROM comparisons WHERE practiceId=? ORDER BY createdAt').all(id) as ComparisonRow[]).map(asComparison),
     };
   }
   listPractices(userId: string) {
     return this.db.prepare(`SELECT p.*, (SELECT count(*) FROM attempts WHERE practiceId=p.id) attemptCount,
-      (SELECT status FROM attempts WHERE practiceId=p.id ORDER BY sequence DESC LIMIT 1) latestStatus
+      (SELECT status FROM attempts WHERE practiceId=p.id ORDER BY sequence DESC LIMIT 1) latestStatus,
+      (SELECT count(*) FROM reflections WHERE practiceId=p.id) reflectionCount
       FROM practices p WHERE userId=? AND status='active' ORDER BY updatedAt DESC`).all(userId);
   }
   workspaceIssues(userId: string): WorkspaceIssue[] {
@@ -117,22 +121,29 @@ export class Store {
     if (this.db.prepare('SELECT id FROM attempts WHERE practiceId=? LIMIT 1').get(id)) throw new AppError('已有表达记录，请保留原练习目标；新内容请新建练习');
     this.db.prepare('UPDATE practices SET title=?,goal=?,updatedAt=? WHERE id=?').run(title.trim(), retainedGoal.trim(), Date.now(), id);
   }
+  addReflection(userId: string, practiceId: string, text: string): Reflection {
+    this.owned(userId, practiceId); const trimmed = text.trim();
+    if (!trimmed || trimmed.length > 4000) throw new AppError('感悟需为1—4000字');
+    const reflection = { id: randomUUID(), practiceId, text: trimmed, createdAt: Date.now() };
+    this.db.prepare('INSERT INTO reflections (id,practiceId,text,createdAt) VALUES (?,?,?,?)').run(reflection.id, practiceId, trimmed, reflection.createdAt);
+    this.db.prepare('UPDATE practices SET updatedAt=? WHERE id=?').run(reflection.createdAt, practiceId);
+    return reflection;
+  }
   attempt(userId: string, id: string): Attempt {
     const row = this.db.prepare('SELECT * FROM attempts WHERE id=?').get(id) as AttemptRow | undefined;
     if (!row) throw new AppError('录音不存在或无权访问', 404); this.owned(userId, row.practiceId); return asAttempt(row);
   }
   addAttempt(userId: string, practiceId: string, file: { filename: string; mime: string; duration: number }, sourceId?: string, issueId?: string) {
     return this.db.transaction(() => {
-      this.owned(userId, practiceId); let target: Issue | undefined;
-      if (sourceId) {
-        const source = this.attempt(userId, sourceId);
-        if (source.practiceId !== practiceId || source.status !== 'done') throw new AppError('请从已完成分析的同一练习选择问题');
-        target = source.analysis?.issues.find(i => i.id === issueId);
-        if (!target) throw new AppError('重练问题不存在，请重新选择');
-      } else if (issueId) throw new AppError('缺少重练来源');
+      this.owned(userId, practiceId);
+      if (issueId) throw new AppError('重练已改为综合练习，无需选择单个问题');
+      const previous = this.db.prepare('SELECT id,status FROM attempts WHERE practiceId=? ORDER BY sequence DESC LIMIT 1').get(practiceId) as { id: string; status: string } | undefined;
+      if (previous && previous.status !== 'done') throw new AppError('请先完成上一轮分析，再开始下一轮练习');
+      if (sourceId && sourceId !== previous?.id) throw new AppError('请从同一练习的最近一轮继续练习');
+      const actualSourceId = previous?.id || null;
       const id = randomUUID();
       const seq = (this.db.prepare('SELECT coalesce(max(sequence),0)+1 n FROM attempts WHERE practiceId=?').get(practiceId) as { n: number }).n;
-      this.db.prepare('INSERT INTO attempts (id,practiceId,sequence,filename,mime,duration,sourceId,target,createdAt) VALUES (?,?,?,?,?,?,?,?,?)').run(id, practiceId, seq, basename(file.filename), file.mime, file.duration, sourceId || null, target ? JSON.stringify(target) : null, Date.now());
+      this.db.prepare('INSERT INTO attempts (id,practiceId,sequence,filename,mime,duration,sourceId,target,createdAt) VALUES (?,?,?,?,?,?,?,?,?)').run(id, practiceId, seq, basename(file.filename), file.mime, file.duration, actualSourceId, null, Date.now());
       this.db.prepare('UPDATE practices SET updatedAt=? WHERE id=?').run(Date.now(), practiceId);
       return this.attempt(userId, id);
     })();
@@ -154,13 +165,13 @@ export class Store {
   requestComparison(userId: string, attemptId: string) {
     return this.db.transaction(() => {
       const a = this.attempt(userId, attemptId);
-      if (!a.sourceId || !a.target || a.status !== 'done') throw new AppError('请先完成针对问题的重练分析');
+      if (!a.sourceId || a.status !== 'done') throw new AppError('请先完成本轮重练分析');
       const source = this.attempt(userId, a.sourceId);
       if (source.status !== 'done') throw new AppError('来源表达尚未完成分析');
       const old = this.db.prepare("SELECT * FROM comparisons WHERE attemptId=? AND status IN ('queued','running','done') ORDER BY createdAt DESC LIMIT 1").get(attemptId) as ComparisonRow | undefined;
       if (old) return asComparison(old);
       const id = randomUUID();
-      this.db.prepare('INSERT INTO comparisons (id,practiceId,attemptId,sourceId,target,createdAt) VALUES (?,?,?,?,?,?)').run(id, a.practiceId, a.id, a.sourceId, JSON.stringify(a.target), Date.now());
+      this.db.prepare('INSERT INTO comparisons (id,practiceId,attemptId,sourceId,target,createdAt) VALUES (?,?,?,?,?,?)').run(id, a.practiceId, a.id, a.sourceId, JSON.stringify(source.analysis?.issues || []), Date.now());
       this.newJob('comparison', id, a.practiceId);
       return asComparison(this.db.prepare('SELECT * FROM comparisons WHERE id=?').get(id) as ComparisonRow);
     })();
@@ -190,6 +201,11 @@ export class Store {
       if (job.kind === 'analysis') this.db.prepare("UPDATE attempts SET analysis=?,transcript=?,rawResponse=?,status='done',error='' WHERE id=?").run(JSON.stringify(result), (result as Analysis).transcript, raw, job.targetId);
       else this.db.prepare("UPDATE comparisons SET result=?,rawResponse=?,status='done',error='' WHERE id=?").run(JSON.stringify(result), raw, job.targetId);
       this.db.prepare("UPDATE jobs SET state='done' WHERE id=?").run(id);
+      if (job.kind === 'analysis') {
+        const p = this.db.prepare('SELECT userId FROM practices WHERE id=?').get(job.practiceId) as { userId: string };
+        const a = this.attempt(p.userId, job.targetId);
+        if (a.sourceId) this.requestComparison(p.userId, a.id);
+      }
       this.db.prepare('UPDATE practices SET updatedAt=? WHERE id=?').run(Date.now(), job.practiceId); return true;
     })();
   }

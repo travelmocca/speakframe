@@ -11,6 +11,7 @@ const analysisSchema = z.object({
   issues: z.array(issueSchema).max(20), uncertainty: short.nullish().transform(v => v || ''),
 });
 const comparisonSchema = z.object({
+  changes: z.array(z.object({ dimension: z.enum(DIMENSIONS), status: z.enum(['有改善', '无明显变化', '仍需改进', '无法判断']), beforeEvidence: short, afterEvidence: short, explanation: short.min(1) })).max(5).default([]),
   verdict: z.enum(['有改善', '未见明确改善', '无法判断']), summary: short.min(1),
   beforeEvidence: short, afterEvidence: short, remaining: short,
   uncertainty: short.nullish().transform(v => v || ''),
@@ -29,12 +30,19 @@ export function parseAnalysis(text: string) {
     evidenceVerified: normalized(a.transcript).includes(normalized(issue.evidence)) && normalized(issue.evidence).length > 0,
   })) };
 }
-export function parseComparison(text: string, before?: string, after?: string) {
+export function parseComparison(text: string, before?: string, after?: string, requireDimensions = false) {
   const r = comparisonSchema.parse(decode(text));
   const verify = (quote: string, transcript?: string) => transcript === undefined ? null : normalized(quote).length > 0 && normalized(transcript).includes(normalized(quote));
+  if (requireDimensions && (r.changes.length !== 5 || new Set(r.changes.map(c => c.dimension)).size !== 5)) throw new Error('对比必须包含全部五个维度');
+  const changes = r.changes.map(change => {
+    const beforeEvidenceVerified = verify(change.beforeEvidence, before), afterEvidenceVerified = verify(change.afterEvidence, after);
+    const unverified = before !== undefined && after !== undefined && (!beforeEvidenceVerified || !afterEvidenceVerified);
+    return { ...change, explanation: unverified && change.status !== '无法判断' ? `引用尚未核验，暂不能确认此项变化。模型观察：${change.explanation}` : change.explanation, status: unverified ? '无法判断' as const : change.status, beforeEvidenceVerified, afterEvidenceVerified };
+  });
+  const unsupportedImprovement = changes.length > 0 && r.verdict === '有改善' && !changes.some(c => c.status === '有改善' && c.beforeEvidenceVerified && c.afterEvidenceVerified);
   const beforeEvidenceVerified = verify(r.beforeEvidence, before), afterEvidenceVerified = verify(r.afterEvidence, after);
-  const missing = before !== undefined && after !== undefined && (!beforeEvidenceVerified || !afterEvidenceVerified);
-  return { ...r,
+  const missing = before !== undefined && after !== undefined && (!beforeEvidenceVerified || !afterEvidenceVerified) || unsupportedImprovement;
+  return { ...r, changes,
     verdict: missing ? '无法判断' as const : r.verdict,
     summary: missing ? `引用尚未核验，暂不能确认原结论。模型原始比较：${r.summary}` : r.summary,
     beforeEvidenceVerified, afterEvidenceVerified,

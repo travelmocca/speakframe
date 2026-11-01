@@ -23,7 +23,7 @@ export async function saveAudio(file: File, options: { temporary?: boolean; maxS
     await exec('ffmpeg', ['-v', 'error', '-nostdin', '-xerror', '-protocol_whitelist', 'file,pipe', '-i', path, '-t', String(maxSeconds + 1), '-ac', '1', '-ar', '16000', '-f', 's16le', decoded], { timeout: 60_000, maxBuffer: 1024 * 1024 });
     const duration = (await stat(decoded)).size / 32000;
     if (!Number.isFinite(duration) || duration < 0.3) throw new AppError('录音过短或无法读取，请重新录制');
-    if (duration > maxSeconds) throw new AppError(maxSeconds === 30 ? '主题语音最长30秒，请简短描述' : '单次录音不能超过10分钟');
+    if (duration > maxSeconds) throw new AppError(maxSeconds === 30 ? '主题语音最长30秒，请简短描述' : maxSeconds === 120 ? '感悟语音最长2分钟' : '单次录音不能超过10分钟');
     const code = meta.streams.find((s: { codec_type: string }) => s.codec_type === 'audio')?.codec_name;
     const mime = code === 'opus' || code === 'vorbis' ? 'audio/webm' : code === 'aac' ? 'audio/mp4' : code?.startsWith('pcm') ? 'audio/wav' : code === 'mp3' ? 'audio/mpeg' : file.type.split(';')[0] || 'application/octet-stream';
     return { filename, mime, duration };

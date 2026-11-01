@@ -7,6 +7,7 @@ import { DATA_DIR, MAX_BYTES, MODEL, store } from '@/lib/config';
 import { AppError, type Attempt } from '@/lib/store';
 import { saveAudio, modelAudio } from '@/lib/storage';
 import { qwen } from '@/lib/qwen';
+import { REFLECTION_PROMPT, parseReflectionSpeech } from '@/lib/reflection-speech';
 import { TOPIC_PROMPT, parseTopic } from '@/lib/topic';
 import { getScenario } from '@/lib/scenarios';
 import { verifyOrigin } from '@/lib/http-security';
@@ -71,18 +72,22 @@ async function route(req: NextRequest, { params }: { params: Promise<{ path: str
         return json({ attempt: visibleAttempt(attempt) }, 201);
       } catch (e) { await rm(join(DATA_DIR, 'audio', saved.filename), { force: true }); throw e; }
     }
-    if (path[0] === 'practices' && path[2] === 'topic-voice' && path.length === 3 && method === 'POST') {
-      const p = db.practice(user.id, path[1]);
-      if (p.attempts.length) throw new AppError('已有表达记录，主题不能再修改');
-      db.limit(`topic-voice:${user.id}`, 60);
+    if (path[0] === 'practices' && path[2] === 'reflections' && path.length === 3 && method === 'POST') {
+      db.owned(user.id, path[1]); const input = z.object({ text: z.string().min(1).max(4000) }).parse(await body(req));
+      db.limit(`reflection:${user.id}`, 120); return json({ reflection: db.addReflection(user.id, path[1], input.text) }, 201);
+    }
+    if (path[0] === 'practices' && ['topic-voice', 'reflection-voice'].includes(path[2]) && path.length === 3 && method === 'POST') {
+      const p = db.practice(user.id, path[1]), reflection = path[2] === 'reflection-voice';
+      if (!reflection && p.attempts.length) throw new AppError('已有表达记录，主题不能再修改');
+      db.limit(`${path[2]}:${user.id}`, 60);
       const bytes = await limitedBody(req, 11 * 1024 * 1024);
       const form = await new Response(bytes, { headers: { 'Content-Type': req.headers.get('content-type') || '' } }).formData();
-      const file = form.get('audio'); if (!(file instanceof File)) throw new AppError('请选择有效的主题语音');
-      const saved = await saveAudio(file, { temporary: true, maxSeconds: 30, maxBytes: 10 * 1024 * 1024 });
+      const file = form.get('audio'); if (!(file instanceof File)) throw new AppError('请选择有效语音');
+      const saved = await saveAudio(file, { temporary: true, maxSeconds: reflection ? 120 : 30, maxBytes: 10 * 1024 * 1024 });
       try {
-        const reply = await qwen(TOPIC_PROMPT, await modelAudio(saved.filename, 'tmp'));
+        const reply = await qwen(reflection ? REFLECTION_PROMPT : TOPIC_PROMPT, await modelAudio(saved.filename, 'tmp'));
         db.owned(user.id, path[1]);
-        return json({ title: parseTopic(reply.content) });
+        return json(reflection ? { text: parseReflectionSpeech(reply.content) } : { title: parseTopic(reply.content) });
       } finally { await rm(join(DATA_DIR, 'tmp', saved.filename), { force: true }); }
     }
     if (path[0] === 'attempts' && path.length === 3) {

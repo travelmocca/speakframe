@@ -281,3 +281,26 @@ dialog p { margin-top: var(--space-md); line-height: 1.8; }
   .scenario-actions { align-items: stretch; flex-direction: column; }
   .scenario-guide { padding: var(--space-md); }
 }
+
+.practice-heading-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); }
+.practice-heading-row h1 { min-width: 0; }
+.practice-heading-row .button { flex-shrink: 0; }
+.repeat-actions { margin-top: var(--space-lg); padding-block: var(--space-lg); border-top: 1px solid var(--color-rule); }
+.repeat-actions p { margin-top: var(--space-sm); max-width: 65ch; }
+.dimension-changes > section { padding-block: var(--space-lg); border-bottom: 1px solid var(--color-rule); }
+.dimension-changes .section-heading { margin-bottom: var(--space-sm); }
+.dimension-changes p { max-width: 65ch; overflow-wrap: break-word; line-height: 1.8; }
+.dimension-changes summary { min-height: 44px; align-content: center; cursor: pointer; font-size: var(--text-sm); }
+.comparison-result > h3 { font-size: var(--text-md); margin-top: var(--space-lg); margin-bottom: var(--space-sm); }
+.comparison-result ul { padding-left: var(--space-lg); line-height: 1.8; }
+.exit-reflection { max-width: 80ch; padding-block: var(--space-lg) var(--space-xl); }
+.exit-reflection > h2 { font-size: var(--text-xl); }
+.exit-reflection > p { max-width: 65ch; line-height: 1.8; margin-block: var(--space-md); }
+.exit-reflection > label { margin-top: var(--space-lg); }
+.exit-reflection > textarea { min-height: 180px; }
+.exit-reflection .topic-voice { margin-block: var(--space-md); }
+.reflection-history { margin-top: var(--space-xl); padding-block: var(--space-lg); border-top: 1px solid var(--color-rule); }
+.reflection-history > summary { min-height: 44px; cursor: pointer; align-content: center; }
+.reflection-history article { padding-block: var(--space-lg); border-bottom: 1px solid var(--color-rule); }
+.reflection-history article > p:last-child { margin-top: var(--space-sm); white-space: pre-wrap; max-width: 65ch; overflow-wrap: break-word; line-height: 1.8; }
+@media (max-width: 760px) { .practice-heading-row { flex-direction: column; align-items: flex-start; gap: var(--space-sm); } }

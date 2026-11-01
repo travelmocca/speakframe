@@ -5,7 +5,8 @@ import { Mic } from './app-shell';
 import { RecordingWave } from './recording-wave';
 import { ProcessingIndicator } from './processing-indicator';
 
-export function TopicVoiceInput({ practiceId, disabled, onResult, onBusyChange }: { practiceId: string; disabled: boolean; onResult: (title: string) => Promise<void>; onBusyChange: (busy: boolean) => void }) {
+export function TopicVoiceInput({ practiceId, disabled, onResult, onBusyChange, kind = 'topic' }: { kind?: 'topic' | 'reflection'; practiceId: string; disabled: boolean; onResult: (title: string) => Promise<void>; onBusyChange: (busy: boolean) => void }) {
+  const reflection = kind === 'reflection', label = reflection ? '感悟' : '主题';
   const [phase, setPhase] = useState<'idle' | 'asking' | 'recording' | 'transcribing'>('idle');
   const [error, setError] = useState('');
   const stream = useRef<MediaStream | null>(null), recorder = useRef<MediaRecorder | null>(null), timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -28,28 +29,28 @@ export function TopicVoiceInput({ practiceId, disabled, onResult, onBusyChange }
       const r = new MediaRecorder(s, mime ? { mimeType: mime } : undefined); recorder.current = r;
       const chunks: Blob[] = [];
       r.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
-      r.onerror = () => { run.current++; s.getTracks().forEach(t => t.stop()); if (active.current) { setPhase('idle'); setError('主题录音中断，请检查麦克风后重试'); } };
+      r.onerror = () => { run.current++; s.getTracks().forEach(t => t.stop()); if (active.current) { setPhase('idle'); setError(`${label}录音中断，请检查麦克风后重试`); } };
       r.onstop = async () => {
         if (timeout.current) clearTimeout(timeout.current); s.getTracks().forEach(t => t.stop());
         if (!active.current || ticket !== run.current) return;
         setPhase('transcribing'); controller.current = new AbortController();
         try {
-          const blob = new Blob(chunks, { type: r.mimeType }); if (!blob.size) throw new Error('没有录到主题，请重新说一次');
+          const blob = new Blob(chunks, { type: r.mimeType }); if (!blob.size) throw new Error(`没有录到${label}，请重新说一次`);
           const data = new FormData(); data.append('audio', blob, r.mimeType.includes('mp4') ? 'topic.m4a' : 'topic.webm');
-          const result = await api<{ title: string }>(`/practices/${practiceId}/topic-voice`, { method: 'POST', body: data, signal: controller.current.signal });
-          if (active.current && ticket === run.current) await onResult(result.title);
+          const result = await api<{ title?: string; text?: string }>(`/practices/${practiceId}/${reflection ? 'reflection-voice' : 'topic-voice'}`, { method: 'POST', body: data, signal: controller.current.signal });
+          if (active.current && ticket === run.current) await onResult((reflection ? result.text : result.title) || '');
         } catch (e) { if (active.current && ticket === run.current) setError((e as Error).message); }
         finally { if (active.current && ticket === run.current) setPhase('idle'); }
       };
       r.start(250); setPhase('recording');
-      timeout.current = setTimeout(() => { if (r.state === 'recording') r.stop(); }, 29000);
+      timeout.current = setTimeout(() => { if (r.state === 'recording') r.stop(); }, reflection ? 119000 : 29000);
     } catch (e) {
       stream.current?.getTracks().forEach(t => t.stop());
       if (active.current && ticket === run.current) { setPhase('idle'); setError((e as Error).name === 'NotAllowedError' ? '麦克风权限未开启，请允许麦克风后重试' : (e as Error).message); }
     }
   }
   function cancel() { run.current++; if (timeout.current) clearTimeout(timeout.current); if (recorder.current?.state === 'recording') recorder.current.stop(); stream.current?.getTracks().forEach(t => t.stop()); setPhase('idle'); }
-  return <div className="topic-voice" role="group" aria-label="主题语音输入"><div className="topic-controls">
-    {phase === 'recording' ? <><button type="button" className="button quiet" onClick={() => recorder.current?.stop()}>结束并转文字</button><button type="button" className="text-button" onClick={cancel}>取消语音输入</button></> : <button type="button" className="button quiet" disabled={disabled || phase !== 'idle'} onClick={start}>{phase === 'transcribing' ? <ProcessingIndicator>正在转文字…</ProcessingIndicator> : <><Mic size={18} />{phase === 'asking' ? '正在请求麦克风…' : '语音输入主题'}</>}</button>}
-  </div>{phase === 'recording' && <p className="small muted recording-status" role="status"><RecordingWave stream={stream.current} /><span>正在录主题，最长30秒。</span></p>}{error && <p className="small error-message" role="alert">{error}</p>}</div>;
+  return <div className="topic-voice" role="group" aria-label={`${label}语音输入`}><div className="topic-controls">
+    {phase === 'recording' ? <><button type="button" className="button quiet" onClick={() => recorder.current?.stop()}>结束并转文字</button><button type="button" className="text-button" onClick={cancel}>取消语音输入</button></> : <button type="button" className="button quiet" disabled={disabled || phase !== 'idle'} onClick={start}>{phase === 'transcribing' ? <ProcessingIndicator>正在转文字…</ProcessingIndicator> : <><Mic size={18} />{phase === 'asking' ? '正在请求麦克风…' : `语音输入${label}`}</>}</button>}
+  </div>{phase === 'recording' && <p className="small muted recording-status" role="status"><RecordingWave stream={stream.current} /><span>正在录{label}，最长{reflection ? '2分钟' : '30秒'}。</span></p>}{error && <p className="small error-message" role="alert">{error}</p>}</div>;
 }

@@ -37,5 +37,14 @@ test('real comprehensive comparison and historical nonadjacent comparison preser
     const panel = page.getByTestId('comparison-result'); await expect(panel).toContainText('第 3 次表达与第 1 次表达相比');
     await expect(panel).toContainText('历史选定问题'); await expect(panel).not.toContainText('相邻');
     await page.screenshot({ path: 'outputs/uat/legacy-comparison-scope.png', fullPage: true });
+    await expect(page.locator('.practice-heading-actions button')).toHaveText(['再练一次', '退出练习']);
+    await page.setViewportSize({ width: 390, height: 844 });
+    const retryBox = await page.getByRole('button', { name: '再练一次', exact: true }).boundingBox();
+    const exitBox = await page.getByRole('button', { name: '退出练习', exact: true }).boundingBox();
+    expect(retryBox!.x + retryBox!.width).toBeLessThanOrEqual(exitBox!.x);
+    expect(retryBox!.y).toBe(exitBox!.y);
+    await page.screenshot({ path: 'outputs/uat/practice-heading-actions-mobile.png', fullPage: true });
+    await page.getByRole('button', { name: '再练一次', exact: true }).click();
+    await expect(page.getByRole('heading', { name: '本轮综合练习', exact: true })).toBeVisible();
   } finally { db.deletePractice(user.id, practice.id); db.close(); }
 });

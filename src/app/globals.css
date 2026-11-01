@@ -304,3 +304,5 @@ dialog p { margin-top: var(--space-md); line-height: 1.8; }
 .reflection-history article { padding-block: var(--space-lg); border-bottom: 1px solid var(--color-rule); }
 .reflection-history article > p:last-child { margin-top: var(--space-sm); white-space: pre-wrap; max-width: 65ch; overflow-wrap: break-word; line-height: 1.8; }
 @media (max-width: 760px) { .practice-heading-row { flex-direction: column; align-items: flex-start; gap: var(--space-sm); } }
+
+.practice-heading-actions { display: flex; align-items: center; flex-shrink: 0; gap: var(--space-sm); }

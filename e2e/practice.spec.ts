@@ -46,6 +46,7 @@ test('three real recording rounds, automatic comprehensive comparisons, text and
       await expect(page.locator('.dimension-changes > section')).toHaveCount(5);
     }
   }
+  await expect(page.locator('.practice-heading-actions button')).toHaveText(['再练一次', '退出练习']);
   const { practice } = await (await page.request.get(`/api/practices/${id}`)).json();
   expect(practice.attempts).toHaveLength(3); expect(practice.comparisons).toHaveLength(2);
   expect(practice.attempts[1].sourceId).toBe(practice.attempts[0].id); expect(practice.attempts[2].sourceId).toBe(practice.attempts[1].id);

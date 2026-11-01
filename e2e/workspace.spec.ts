@@ -56,6 +56,8 @@ test('workspace history, issue dimensions, source retry, responsive layout and d
     await expect(page.locator('.workspace-issue')).toHaveCount(1);
     await page.getByRole('link', { name: '参考全部问题重练', exact: true }).click();
     await expect(page.getByRole('heading', { name: '本轮综合练习' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: '本次问题', exact: true })).toBeVisible();
+    await expect(page.locator('.issue-parts dt')).toHaveText(['原文', '问题', '建议', '原文', '问题', '建议']);
     await expect(page.locator('.retry-target')).toContainText('全部问题');
     await page.reload();
     await expect(page.locator('.retry-target')).toContainText('全部问题');

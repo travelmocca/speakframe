@@ -306,3 +306,8 @@ dialog p { margin-top: var(--space-md); line-height: 1.8; }
 @media (max-width: 760px) { .practice-heading-row { flex-direction: column; align-items: flex-start; gap: var(--space-sm); } }
 
 .practice-heading-actions { display: flex; align-items: center; flex-shrink: 0; gap: var(--space-sm); }
+
+.issue-parts { margin-top: var(--space-md); }
+.issue-parts > div + div { margin-top: var(--space-md); }
+.issue-parts dt { color: var(--color-muted); }
+.issue-parts blockquote { margin-block: var(--space-xs); }

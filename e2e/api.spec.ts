@@ -15,7 +15,8 @@ test('API ownership, real audio validation, duplicate account, login, range and 
   const { practice } = await (await a.post('/api/practices', { data: { scenario: 'opinion' } })).json();
   const url = `/api/practices/${practice.id}`;
   const privateWorkspace = await (await b.get('/api/workspace')).json();
-  expect(privateWorkspace.practices).toEqual([]); expect(privateWorkspace.issues).toEqual([]);
+  expect(privateWorkspace.practices).toEqual([]); expect(privateWorkspace.issues).toEqual([]); expect(privateWorkspace.activity.days).toEqual([]);
+  expect((await b.get('/api/activity?date=not-a-date')).status()).toBe(400);
   expect((await b.get(url)).status()).toBe(404);
   expect((await b.patch(url, { data: { title: 'x', goal: 'x' } })).status()).toBe(404);
   expect((await b.delete(url)).status()).toBe(404);
@@ -33,6 +34,10 @@ test('API ownership, real audio validation, duplicate account, login, range and 
   expect((await a.post(`${url}/topic-voice`)).status()).toBe(400);
   const { attempt } = await uploaded.json();
   expect(attempt.duration).toBeGreaterThan(1);
+  const calendar = (await (await a.get('/api/workspace')).json()).activity;
+  expect(calendar.days.reduce((sum: number, day: { count: number }) => sum + day.count, 0)).toBe(1);
+  expect((await (await a.get(`/api/activity?date=${calendar.today}`)).json()).attempts).toHaveLength(1);
+  expect((await (await b.get(`/api/activity?date=${calendar.today}`)).json()).attempts).toEqual([]);
   const audioUrl = `/api/attempts/${attempt.id}/audio`;
   expect((await b.get(audioUrl)).status()).toBe(404);
   const full = await a.get(audioUrl); expect(full.status()).toBe(200);

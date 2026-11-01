@@ -3,6 +3,7 @@ import { createHash, randomBytes, randomUUID, scryptSync, timingSafeEqual } from
 import { chmodSync, mkdirSync, rmSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import type { Analysis, Issue, ComparisonResult } from './analysis-schema';
+import { isDateKey, DAY_MS, type ActivityDay, type ActivityRecord } from './activity';
 import { getScenario } from './scenarios';
 
 export class AppError extends Error {
@@ -106,6 +107,19 @@ export class Store {
       (SELECT status FROM attempts WHERE practiceId=p.id ORDER BY sequence DESC LIMIT 1) latestStatus,
       (SELECT count(*) FROM reflections WHERE practiceId=p.id) reflectionCount
       FROM practices p WHERE userId=? AND status='active' ORDER BY updatedAt DESC`).all(userId);
+  }
+  activityDays(userId: string, now = Date.now()): ActivityDay[] {
+    const rows = this.db.prepare(`SELECT strftime('%Y-%m-%d',a.createdAt/1000,'unixepoch','+8 hours') date,count(*) count,group_concat(a.id, ',') ids
+      FROM attempts a JOIN practices p ON p.id=a.practiceId
+      WHERE p.userId=? AND p.status='active' AND a.createdAt<=? GROUP BY date ORDER BY date`).all(userId, now) as { date: string; count: number; ids: string }[];
+    return rows.map(({ ids, ...day }) => ({ ...day, revision: hash(ids.split(',').sort().join(',')) }));
+  }
+  activityForDate(userId: string, date: string, now = Date.now()): ActivityRecord[] {
+    if (!isDateKey(date)) throw new AppError('请选择有效日期');
+    const start = Date.parse(date + 'T00:00:00+08:00');
+    return this.db.prepare(`SELECT p.id practiceId,p.title,a.id attemptId,a.sequence,a.createdAt
+      FROM attempts a JOIN practices p ON p.id=a.practiceId
+      WHERE p.userId=? AND p.status='active' AND a.createdAt>=? AND a.createdAt<? ORDER BY a.createdAt DESC,a.id`).all(userId, start, Math.min(start + DAY_MS, now + 1)) as ActivityRecord[];
   }
   workspaceIssues(userId: string): WorkspaceIssue[] {
     const rows = this.db.prepare(`SELECT p.id practiceId,p.title,a.id attemptId,a.sequence,a.createdAt,a.analysis

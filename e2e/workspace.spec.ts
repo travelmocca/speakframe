@@ -19,6 +19,8 @@ test('workspace history, issue dimensions, source retry, responsive layout and d
   const ids: string[] = [], origin = new URL(page.url()).origin;
   const headers = { Origin: origin };
   const { user } = await (await page.request.get('/api/me')).json();
+  const { activity: initialActivity } = await (await page.request.get('/api/workspace')).json();
+  const today = initialActivity.today as string, currentYear = Number(today.slice(0, 4)), oldDate = `${currentYear - 1}-01-02`;
   const db = new Store(resolve(process.env.APP_DATA_DIR || 'var'));
   try {
     const dimensions = ['抓重点', '排顺序', '展开内容', '衔接与恢复', '口头禅与语气垫词'].map(name => ({ name, finding: '测试观察' }));
@@ -34,11 +36,34 @@ test('workspace history, issue dimensions, source retry, responsive layout and d
           { dimension: '抓重点', evidence: '我还有很多想法', impact: '没有明确最希望听众记住的结论。', suggestion: '先用一句话说出本次建议，再说明原因。' },
           { dimension: '展开内容', evidence: '先检查数据', impact: '建议缺少具体依据。', suggestion: '补充一次检查发现问题的具体例子。' },
         ] : [{ dimension: '口头禅与语气垫词', evidence: '然后，然后', impact: '重复的连接词打断主线。', suggestion: '删掉重复的然后，停顿后直接说下一句。' }], uncertainty: '自动化测试的受控反馈，不是真实模型结论。' }));
-      db.db.prepare("UPDATE attempts SET status='done',analysis=?,transcript=? WHERE id=?").run(JSON.stringify(analysis), analysis.transcript, attempt.id);
+      db.db.prepare("UPDATE attempts SET status='done',analysis=?,transcript=?,createdAt=? WHERE id=?").run(JSON.stringify(analysis), analysis.transcript, index === 0 ? Date.parse(`${oldDate}T12:00:00+08:00`) : Date.now(), attempt.id);
     }
     await page.reload();
     await expect(page.locator('.practice-row')).toHaveCount(3);
     await expect(page.locator('.workspace-issue')).toHaveCount(3);
+    await expect(page.locator('.workspace-issue[open]')).toHaveCount(0);
+    await expect(page.getByRole('heading', { name: '每日表达记录', exact: true })).toBeVisible();
+    await page.getByRole('combobox', { name: '表达记录年份', exact: true }).selectOption(String(currentYear - 1));
+    await page.getByRole('button', { name: `${oldDate}：1次表达`, exact: true }).click();
+    await expect(page.locator('.activity-records li')).toHaveCount(1);
+    await expect(page.locator('.activity-records')).toContainText(themes[0]);
+    const oldCell = page.getByRole('button', { name: `${oldDate}：1次表达`, exact: true });
+    await oldCell.focus(); await page.keyboard.press('ArrowDown');
+    await expect(page.locator(`[data-date="${currentYear - 1}-01-03"]`)).toBeFocused();
+    await page.keyboard.press('ArrowUp'); await expect(oldCell).toBeFocused();
+    let detailRequests = 0;
+    await page.route('**/api/activity?date=*', async route => { detailRequests++; await new Promise(resolve => setTimeout(resolve, 6000)); await route.continue(); });
+    await page.getByRole('button', { name: `${oldDate}：1次表达`, exact: true }).click();
+    await expect(page.locator('.activity-records li')).toHaveCount(1);
+    await page.waitForResponse(response => response.url().includes('/api/activity?date=') && response.status() === 200, { timeout: 15000 });
+    expect(detailRequests).toBe(1);
+    await page.unroute('**/api/activity?date=*');
+    await page.reload();
+    await expect(page.getByRole('combobox', { name: '表达记录年份', exact: true })).toHaveValue(String(currentYear - 1));
+    await expect(page.locator('.activity-records li')).toHaveCount(1);
+    await page.getByLabel('查看某一天的表达', { exact: true }).fill(today);
+    await expect(page.locator('.activity-records')).toContainText(themes[1]);
+    await expect(page.getByRole('combobox', { name: '表达记录年份', exact: true })).toHaveValue(String(currentYear));
     for (const [width, height] of [[1280, 800], [1440, 900], [1920, 1080], [375, 812]]) {
       await page.setViewportSize({ width, height });
       await page.screenshot({ path: `outputs/uat/workspace-${width}.png`, fullPage: true });
@@ -54,6 +79,7 @@ test('workspace history, issue dimensions, source retry, responsive layout and d
     await expect(page.getByText('这个维度暂无问题反馈')).toBeVisible();
     await page.goBack();
     await expect(page.locator('.workspace-issue')).toHaveCount(1);
+    await page.locator('.workspace-issue summary').first().click();
     await page.getByRole('link', { name: '参考全部问题重练', exact: true }).click();
     await expect(page.getByRole('heading', { name: '本轮综合练习' })).toBeVisible();
     await expect(page.getByRole('heading', { name: '本次问题', exact: true })).toBeVisible();
@@ -83,12 +109,13 @@ test('workspace history, issue dimensions, source retry, responsive layout and d
     await page.reload();
     await expect(page.locator('.retry-target')).toContainText('全部问题');
     await page.getByRole('button', { name: '开始录音', exact: true }).click();
-    await page.waitForTimeout(800);
+    await page.waitForTimeout(2000);
     await page.getByRole('button', { name: '结束录音', exact: true }).click();
     await expect(page.locator('audio')).toHaveCount(1);
     page.once('dialog', dialog => dialog.accept());
     await page.getByRole('link', { name: '返回练习记录', exact: true }).click();
     await page.getByRole('button', { name: /^展开内容/ }).click();
+    await page.locator('.workspace-issue summary').first().click();
     await page.getByRole('link', { name: '参考全部问题重练', exact: true }).click();
     await expect(page.getByRole('heading', { name: '本轮综合练习' })).toBeVisible();
     await expect(page.locator('audio')).toHaveCount(1);
@@ -109,6 +136,8 @@ test('workspace history, issue dimensions, source retry, responsive layout and d
     await page.getByRole('button', { name: '确认删除', exact: true }).click();
     await expect(page.locator('.practice-row')).toHaveCount(2);
     await expect(page.locator('.workspace-issue')).toHaveCount(1);
+    const finalActivity = (await (await page.request.get('/api/workspace')).json()).activity;
+    expect(finalActivity.days.reduce((sum: number, day: { count: number }) => sum + day.count, 0)).toBe(1);
   } finally {
     for (const id of ids) { try { db.deletePractice(user.id, id); } catch { /* Already deleted by the UI. */ } }
     db.close();

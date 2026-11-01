@@ -9,6 +9,7 @@ import { saveAudio, modelAudio } from '@/lib/storage';
 import { qwen } from '@/lib/qwen';
 import { REFLECTION_PROMPT, parseReflectionSpeech } from '@/lib/reflection-speech';
 import { TOPIC_PROMPT, parseTopic } from '@/lib/topic';
+import { beijingDay } from '@/lib/activity';
 import { getScenario } from '@/lib/scenarios';
 import { verifyOrigin } from '@/lib/http-security';
 
@@ -45,7 +46,8 @@ async function route(req: NextRequest, { params }: { params: Promise<{ path: str
     }
     if (path[0] === 'auth' && path[1] === 'logout' && method === 'POST') { db.revokeSession(token); jar.delete('expression_session'); return json({ ok: true }); }
     const user = db.sessionUser(token); if (!user) throw new AppError('请先登录', 401);
-    if (path[0] === 'workspace' && path.length === 1 && method === 'GET') return json({ practices: db.listPractices(user.id), issues: db.workspaceIssues(user.id) });
+    if (path[0] === 'workspace' && path.length === 1 && method === 'GET') { const now = Date.now(); return json({ practices: db.listPractices(user.id), issues: db.workspaceIssues(user.id), activity: { today: beijingDay(now), days: db.activityDays(user.id, now) } }); }
+    if (path[0] === 'activity' && path.length === 1 && method === 'GET') return json({ attempts: db.activityForDate(user.id, req.nextUrl.searchParams.get('date') || '') });
     if (path[0] === 'me' && method === 'GET') return json({ user, model: MODEL, configured: Boolean(process.env.DASHSCOPE_API_KEY && process.env.DASHSCOPE_BASE_URL) });
     if (path[0] === 'practices' && path.length === 1) {
       if (method === 'GET') return json({ practices: db.listPractices(user.id) });

@@ -1,4 +1,6 @@
 :root {
+  --activity-cell: 12px; --activity-weekday-width: 24px;
+  --color-activity-0: oklch(93% 0.009 160); --color-activity-1: oklch(86% 0.055 160); --color-activity-2: oklch(72% 0.09 160); --color-activity-3: oklch(57% 0.12 160); --color-activity-4: oklch(42% 0.11 160);
   color-scheme: light;
   --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
   --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.2rem; --text-xl: 1.44rem; --text-2xl: 1.728rem; --text-3xl: 2.074rem;

@@ -21,11 +21,24 @@ export async function qwen(prompt: string, audio?: { bytes: Buffer; format: 'mp3
   if (!key || !base) throw new AppError('模型尚未配置，请在服务端配置百炼API Key和地址', 503);
   const content: object[] = [{ type: 'text', text: prompt }];
   if (audio) content.unshift({ type: 'input_audio', input_audio: { data: `data:audio/${audio.format};base64,${audio.bytes.toString('base64')}`, format: audio.format } });
-  const response = await fetch(`${base}/chat/completions`, {
-    method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ model: MODEL, messages: [{ role: 'user', content }], stream: true, stream_options: { include_usage: true }, modalities: ['text'], enable_thinking: false, max_tokens: 10000 }),
-    signal: AbortSignal.timeout(150_000),
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${base}/chat/completions`, {
+      method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: MODEL, messages: [{ role: 'user', content }], stream: true, stream_options: { include_usage: true }, modalities: ['text'], enable_thinking: false, max_tokens: 10000 }),
+      signal: AbortSignal.timeout(150_000),
+    });
+  } catch (error) {
+    const cause = error instanceof Error ? (error as Error & { cause?: { code?: string } }).cause : undefined;
+    const code = cause?.code || '';
+    const message = error instanceof Error ? error.message : String(error);
+    const timedOut = (error instanceof Error && error.name === 'TimeoutError') || code === 'ETIMEDOUT' || code === 'UND_ERR_CONNECT_TIMEOUT' || /aborted|timeout/i.test(message);
+    const unreachable = code === 'ECONNRESET' || code === 'ENOTFOUND' || code === 'EAI_AGAIN' || code === 'ECONNREFUSED' || /fetch failed/i.test(message);
+    if (timedOut || unreachable) {
+      throw new AppError('模型服务暂时连不上，请稍后重试或改用手动输入主题', 503);
+    }
+    throw error;
+  }
   if (!response.ok || !response.body) throw new AppError(response.status === 401 || response.status === 403 ? '模型鉴权失败，请检查服务端模型权限' : response.status === 429 ? '模型请求繁忙，请稍后重试' : `模型服务暂不可用（${response.status}），请重试`, 502);
   const reader = response.body.getReader(), decoder = new TextDecoder();
   let buffer = '', answer = '', finish = '', actualModel = '', requestId = '', usage: unknown = null;

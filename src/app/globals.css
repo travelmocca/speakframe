@@ -370,3 +370,16 @@ dialog p { margin-top: var(--space-md); line-height: 1.8; }
 .activity-toolbar label { flex-shrink: 0; white-space: nowrap; }
 .activity-scroll-hint { display: none; }
 @media (max-width: 760px) { .activity-scroll-hint { display: block; margin-top: var(--space-sm); } }
+
+/* BoardUI coexistence: keep mint/paper chrome; BoardUI handles own tokens */
+.work-tabs { gap: var(--space-lg); }
+.work-toolbar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-lg); }
+.work-tab-list { flex: 1 1 auto; min-width: 0; }
+.topic-form { display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-xl); }
+.auth-boardui-form { margin-top: var(--space-lg); }
+.workspace-issue-title, .issue-summary-content { display: flex; flex-direction: column; gap: 0.25rem; text-align: start; min-width: 0; }
+.workspace-issue-title strong, .issue-summary-content strong { font-size: var(--text-md); color: var(--color-ink); }
+.workspace-issue-preview, .issue-preview { display: block; font-size: var(--text-sm); color: var(--color-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400; }
+.issue-index { font-size: var(--text-sm); color: var(--color-muted); font-weight: 600; }
+.reflection-history { margin-top: var(--space-xl); }
+.practice-heading-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }

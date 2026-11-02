@@ -1,0 +1,33 @@
+/* Speakframe mint/paper brand remaps for BoardUI tokens.
+ * Keep BoardUI components, retint accent + surfaces to the Dose palette. */
+
+@theme {
+  /* Mint accent ramp (oklch hue ~160) — replaces default blue accent-* */
+  --color-accent-50: oklch(97% 0.015 160);
+  --color-accent-100: oklch(93% 0.036 160);
+  --color-accent-200: oklch(88% 0.08 160);
+  --color-accent-300: oklch(78% 0.09 160);
+  --color-accent-400: oklch(65% 0.11 160);
+  --color-accent-500: oklch(50% 0.13 160);
+  --color-accent-600: oklch(45% 0.14 160);
+  --color-accent-700: oklch(42% 0.11 162);
+  --color-accent-800: oklch(35% 0.09 162);
+  --color-accent-900: oklch(28% 0.07 165);
+  --color-accent-950: oklch(21% 0.025 170);
+
+  /* Prefer Chinese-capable stack; Inter variable still available for Latin glyphs */
+  --font-sans: var(--font-inter), "PingFang SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif,
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+:root {
+  --color-background-primary-default: oklch(97.6% 0.011 88);
+  --color-background-secondary-default: oklch(96.5% 0.02 160);
+  --color-background-tertiary-default: oklch(93% 0.036 160);
+  --color-text-primary: oklch(21% 0.025 170);
+  --color-text-secondary: oklch(31% 0.02 170);
+  --color-text-tertiary: oklch(49% 0.024 165);
+  --color-text-placeholder: oklch(49% 0.024 165);
+  --color-border-primary: oklch(86.5% 0.022 140);
+  --color-border-secondary: oklch(86.5% 0.022 140);
+}

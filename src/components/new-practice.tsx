@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { AppShell } from './app-shell';
 import { api } from '@/lib/client';
 import { getScenario, SCENARIOS } from '@/lib/scenarios';
+import { Button } from '@/components/base/buttons/button';
 
 export function NewPractice() {
   const [selected, setSelected] = useState(''), [busy, setBusy] = useState(false), [error, setError] = useState('');
@@ -20,6 +21,6 @@ export function NewPractice() {
     <fieldset className="scenario-picker" disabled={busy}><legend className="sr-only">选择表达场景</legend>{SCENARIOS.map(scene => <label key={scene.id} className="scenario-option"><input type="radio" name="scenario" value={scene.id} checked={selected === scene.id} onChange={() => choose(scene.id)} aria-label={scene.title} /><span><strong>{scene.title}</strong><span className="scenario-steps-preview">{scene.steps.join(' → ')}</span></span></label>)}</fieldset>
     <div className="scenario-preview" aria-live="polite">{scenario ? <><h2>{scenario.title}</h2><p>{scenario.purpose}</p><blockquote>{scenario.example}</blockquote><p className="small muted">{scenario.tip}</p></> : <><h2>一次先练一种</h2><p className="muted">选择场景后，可以看到例子；开始录音时，框架会一直保留在页面上。</p></>}</div>
     {error && <p role="alert" className="error-message">{error}</p>}
-    <div className="scenario-actions"><p className="small muted">框架用来组织思路，不必把每个步骤都念出来。</p><button type="button" className="button primary" disabled={!scenario || busy} aria-busy={busy} onClick={create}>{busy ? '正在创建…' : '开始练习'}</button></div>
+    <div className="scenario-actions"><p className="small muted">框架用来组织思路，不必把每个步骤都念出来。</p><Button type="button" variant="primary" size="medium" disabled={!scenario || busy} aria-busy={busy || undefined} onClick={create}>{busy ? '正在创建…' : '开始练习'}</Button></div>
   </AppShell>;
 }

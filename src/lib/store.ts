@@ -196,7 +196,7 @@ export class Store {
       for (const e of expired) this.failJob(e.id, '处理已中断，请手动重试；原始录音已保留');
       const job = this.db.prepare("SELECT j.* FROM jobs j JOIN practices p ON p.id=j.practiceId WHERE j.state='queued' AND p.status='active' ORDER BY j.createdAt LIMIT 1").get() as Job | undefined;
       if (!job) return null;
-      this.db.prepare("UPDATE jobs SET state='running',leaseUntil=? WHERE id=?").run(Date.now() + 240_000, job.id);
+      this.db.prepare("UPDATE jobs SET state='running',leaseUntil=? WHERE id=?").run(Date.now() + 420_000, job.id);
       this.db.prepare(`UPDATE ${job.kind === 'analysis' ? 'attempts' : 'comparisons'} SET status='running' WHERE id=?`).run(job.targetId);
       return job;
     })();

@@ -26,7 +26,7 @@ export async function qwen(prompt: string, audio?: { bytes: Buffer; format: 'mp3
     response = await fetch(`${base}/chat/completions`, {
       method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ model: MODEL, messages: [{ role: 'user', content }], stream: true, stream_options: { include_usage: true }, modalities: ['text'], enable_thinking: false, max_tokens: 10000 }),
-      signal: AbortSignal.timeout(150_000),
+      signal: AbortSignal.timeout(300_000),
     });
   } catch (error) {
     const cause = error instanceof Error ? (error as Error & { cause?: { code?: string } }).cause : undefined;

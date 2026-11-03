@@ -14,6 +14,8 @@
   --color-ink: oklch(21% 0.025 170); --color-ink-2: oklch(31% 0.02 170); --color-muted: oklch(49% 0.024 165);
   --color-rule: oklch(86.5% 0.022 140);
   --color-accent: oklch(50% 0.13 160); --color-accent-deep: oklch(42% 0.11 162); --color-accent-soft: oklch(88% 0.08 160); --color-accent-ink: oklch(99% 0.006 160);
+  --color-pie-1: oklch(50% 0.13 160); --color-pie-2: oklch(62% 0.11 145); --color-pie-3: oklch(55% 0.1 175);
+  --color-pie-4: oklch(45% 0.09 150); --color-pie-5: oklch(70% 0.08 155);
   --color-focus: oklch(45% 0.14 160);
   --p-mon: oklch(85% 0.052 22); --p-tue: oklch(87.5% 0.058 64); --p-wed: oklch(91.5% 0.064 98); --p-thu: oklch(86.5% 0.075 160);
   --p-fri: oklch(87% 0.048 210); --p-sat: oklch(84% 0.045 270); --p-sun: oklch(84% 0.048 322);

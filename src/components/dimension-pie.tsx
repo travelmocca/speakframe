@@ -18,11 +18,11 @@ type Props = {
 
 export function DimensionPie({ counts, selected, onSelect, total }: Props) {
   const slices = buildSlices(counts);
-  const size = 180;
+  const size = 156;
   const cx = size / 2;
   const cy = size / 2;
-  const outerR = 78;
-  const innerR = 46;
+  const outerR = 68;
+  const innerR = 40;
   const centerCount = selected && DIMENSIONS.includes(selected as Dimension)
     ? counts[selected as Dimension]
     : total;

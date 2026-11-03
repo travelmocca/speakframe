@@ -27,7 +27,9 @@ export function AnalysisPanel({ analysis }: { analysis: Analysis }) {
           <AccordionItem
             key={issue.id}
             id={issue.id}
-            title={<span className="issue-summary-content"><span className="issue-index">{index + 1}</span><span><strong>{issue.dimension}</strong><span className="issue-preview">{issue.impact.length > 60 ? issue.impact.slice(0, 60) + '…' : issue.impact}</span></span></span>}
+            className="issue"
+            title={<span className="issue-summary-title"><span className="issue-index">{index + 1}</span><strong>{issue.dimension}</strong></span>}
+            description={<span className="issue-preview">{issue.impact.length > 60 ? issue.impact.slice(0, 60) + '…' : issue.impact}</span>}
           >
             <dl className="issue-parts">
               <div><dt>原文</dt><dd><blockquote>{issue.evidence}</blockquote>{!issue.evidenceVerified && <p className="small error-message">这段引用未能与转写匹配，请先回听核对。</p>}</dd></div>

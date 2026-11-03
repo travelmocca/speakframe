@@ -14,6 +14,32 @@ import { AlertDialog } from '@/components/base/modal/modal';
 import { Accordion, AccordionItem } from '@/components/base/accordion/accordion';
 import { Button } from '@/components/base/buttons/button';
 
+
+const DISPLAY_NAME = 'mocca';
+
+function beijingHour(now = Date.now()) {
+  return new Date(now + 8 * 3600000).getUTCHours();
+}
+
+function greetingLabel(now = Date.now()) {
+  const hour = beijingHour(now);
+  if (hour < 5) return '晚上好';
+  if (hour < 12) return '早上好';
+  if (hour < 18) return '下午好';
+  return '晚上好';
+}
+
+function weekPracticeCount(activity: ActivityData | null) {
+  if (!activity) return 0;
+  const end = Date.parse(`${activity.today}T00:00:00+08:00`);
+  if (!Number.isFinite(end)) return 0;
+  const start = end - 6 * 86400000;
+  return activity.days.reduce((sum, day) => {
+    const stamp = Date.parse(`${day.date}T00:00:00+08:00`);
+    return stamp >= start && stamp <= end ? sum + day.count : sum;
+  }, 0);
+}
+
 type Row = { id: string; title: string; goal: string; scenario: string; updatedAt: number; attemptCount: number; reflectionCount: number; latestStatus: string | null };
 
 export function PracticeList() {
@@ -35,8 +61,20 @@ export function PracticeList() {
   function create() { router.push('/practices/new'); }
   const filteredIssues = issues.filter(item => !dimension || item.issue.dimension === dimension);
   const pendingCount = rows.filter(row => row.attemptCount > 0 && row.latestStatus !== 'done').length;
+  const draftCount = rows.filter(row => row.attemptCount === 0).length;
+  const weeklyCount = weekPracticeCount(activity);
+  const greeting = greetingLabel();
   return <AppShell><div className="workspace-heading"><h1>我的表达工作台</h1><p className="muted">留下每次表达，从具体问题开始下一次练习。</p></div>
-    <section className="workspace-start" aria-labelledby="start-heading"><div><h2 id="start-heading">开始一段新表达</h2><p>先选表达场景，带着框架开始练习。</p></div><Button variant="primary" size="medium" disabled={busy} onClick={create} leadingIcon={RiMicLine}>{busy ? '正在创建…' : '新建练习'}</Button></section>
+    <section className="workspace-greeting" aria-labelledby="greeting-heading">
+      <div className="workspace-greeting-copy">
+        <h2 id="greeting-heading">{greeting}，{DISPLAY_NAME} —</h2>
+        <p>今天继续把表达练扎实。</p>
+        {!loading && (!error || rows.length > 0) && (
+          <p className="workspace-greeting-status small muted" aria-label="今日练习状态">{draftCount} 条草稿 · {pendingCount} 条待分析 · 本周已练 {weeklyCount} 次</p>
+        )}
+      </div>
+      <Button variant="primary" size="medium" disabled={busy} onClick={create} leadingIcon={RiMicLine}>{busy ? '正在创建…' : '新建练习'}</Button>
+    </section>
     {error && <div className="notice"><p role="alert" className="error-message">{error}</p>{rows.length > 0 && <p className="small muted">刷新失败，暂时保留上次读取的记录与反馈。</p>}<button className="text-button" onClick={load}>重新加载</button></div>}
     <nav className="workspace-jumps" aria-label="工作台模块"><a href="#activity-heading">每日表达记录</a><a href="#history-heading">历史表达</a><a href="#problems-heading">当前问题分析</a></nav>
     <ActivityHeatmap activity={activity} loading={loading} error={Boolean(error)} />

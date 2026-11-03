@@ -73,7 +73,7 @@ test('three real recording rounds, automatic comprehensive comparisons, text and
   await expect(page).toHaveURL(new RegExp(`/practices/${id}`));
   await page.reload(); await page.getByText('查看练习感悟（2）', { exact: true }).click();
   await expect(page.locator('.reflection-history article')).toHaveCount(2);
-  await page.getByRole('link', { name: '练习记录', exact: true }).click();
+  await page.getByRole('link', { name: '工作台', exact: true }).click();
   await page.getByRole('button', { name: '删除练习', exact: true }).click(); await page.getByRole('button', { name: '确认删除', exact: true }).click();
   await expect(page.getByText('还没有练习记录')).toBeVisible();
   expect((await page.request.get(`/api/practices/${id}`)).status()).toBe(404);
@@ -114,7 +114,7 @@ test('canceling navigation and logout preserves an unsaved browser recording', a
   await expect(page.locator('audio')).toHaveCount(1);
   const original = page.url();
   page.once('dialog', d => d.dismiss());
-  await page.getByRole('link', { name: '练习记录', exact: true }).click();
+  await page.getByRole('link', { name: '工作台', exact: true }).click();
   await expect(page).toHaveURL(original);
   await expect(page.locator('audio')).toHaveCount(1);
   page.once('dialog', d => d.dismiss());
